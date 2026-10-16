@@ -11,3 +11,215 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id           Int            @id @default(autoincrement())
+  name         String?
+  email        String         @unique
+  passwordHash String         @map("password_hash")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  goals        LearningGoal[]
+  usageEvents  UsageEvent[]
+
+  @@map("users")
+}
+
+model Subject {
+  id          Int            @id @default(autoincrement())
+  name        String         @unique
+  description String
+  topics      Topic[]
+  goals       LearningGoal[]
+
+  @@map("subjects")
+}
+
+model Topic {
+  id               Int     @id @default(autoincrement())
+  subjectId        Int     @map("subject_id")
+  title            String
+  sequenceOrder    Int     @map("sequence_order")
+  estimatedMinutes Int     @map("estimated_minutes")
+  subject          Subject @relation(fields: [subjectId], references: [id])
+
+  needs     TopicPrerequisite[] @relation("TopicNeeds")
+  neededBy  TopicPrerequisite[] @relation("TopicNeededBy")
+  lesson    Lesson?
+  questions Question[]
+  attempts  Attempt[]
+  planTasks PlanTask[]
+
+  @@unique([subjectId, sequenceOrder])
+  @@map("topics")
+}
+
+model TopicPrerequisite {
+  topicId             Int   @map("topic_id")
+  prerequisiteTopicId Int   @map("prerequisite_topic_id")
+  topic               Topic @relation("TopicNeeds", fields: [topicId], references: [id])
+  prerequisiteTopic   Topic @relation("TopicNeededBy", fields: [prerequisiteTopicId], references: [id])
+
+  @@id([topicId, prerequisiteTopicId])
+  @@map("topic_prerequisites")
+}
+
+model Lesson {
+  id               Int    @id @default(autoincrement())
+  topicId          Int    @unique @map("topic_id")
+  title            String
+  explanation      String
+  practicalExample String @map("practical_example")
+  codeExample      String @map("code_example")
+  topic            Topic  @relation(fields: [topicId], references: [id])
+
+  @@map("lessons")
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+}
+
+model LearningGoal {
+  id                Int            @id @default(autoincrement())
+  userId            Int            @map("user_id")
+  subjectId         Int            @map("subject_id")
+  targetDate        DateTime       @map("target_date") @db.Date
+  dailyStudyMinutes Int            @map("daily_study_minutes")
+  status            GoalStatus     @default(ACTIVE)
+  createdAt         DateTime       @default(now()) @map("created_at")
+  completedAt       DateTime?      @map("completed_at")
+  user              User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject           Subject        @relation(fields: [subjectId], references: [id])
+  plans             LearningPlan[]
+
+  attempts Attempt[]
+
+  @@index([userId])
+  @@map("learning_goals")
+}
+
+enum AssessmentType {
+  DIAGNOSTIC
+  QUIZ
+}
+
+enum AttemptStatus {
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum KnowledgeLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model Question {
+  id            Int             @id @default(autoincrement())
+  topicId       Int             @map("topic_id")
+  purpose       AssessmentType
+  questionText  String          @map("question_text")
+  options       Json
+  correctAnswer String          @map("correct_answer")
+  explanation   String
+  topic         Topic           @relation(fields: [topicId], references: [id])
+  answers       AttemptAnswer[]
+
+  @@index([topicId, purpose])
+  @@map("questions")
+}
+
+model Attempt {
+  id             Int             @id @default(autoincrement())
+  goalId         Int             @map("goal_id")
+  type           AssessmentType
+  topicId        Int?            @map("topic_id")
+  status         AttemptStatus   @default(IN_PROGRESS)
+  correctCount   Int             @default(0) @map("correct_count")
+  totalQuestions Int             @map("total_questions")
+  knowledgeLevel KnowledgeLevel? @map("knowledge_level")
+  startedAt      DateTime        @default(now()) @map("started_at")
+  completedAt    DateTime?       @map("completed_at")
+  goal           LearningGoal    @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  topic          Topic?          @relation(fields: [topicId], references: [id])
+  answers        AttemptAnswer[]
+
+  @@index([goalId, topicId])
+  @@map("attempts")
+}
+
+model AttemptAnswer {
+  id             Int      @id @default(autoincrement())
+  attemptId      Int      @map("attempt_id")
+  questionId     Int      @map("question_id")
+  selectedAnswer String   @map("selected_answer")
+  isCorrect      Boolean  @map("is_correct")
+  attempt        Attempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question       Question @relation(fields: [questionId], references: [id])
+
+  @@unique([attemptId, questionId])
+  @@map("attempt_answers")
+}
+
+enum TaskType {
+  LEARN
+  QUIZ
+}
+
+enum TaskStatus {
+  PENDING
+  COMPLETED
+}
+
+enum EventType {
+  SIGN_UP
+  GOAL_CREATED
+  TASK_COMPLETED
+  QUIZ_COMPLETED
+  AI_REQUEST
+  AI_FAILURE
+}
+
+model LearningPlan {
+  id          Int          @id @default(autoincrement())
+  goalId      Int          @map("goal_id")
+  generatedAt DateTime     @default(now()) @map("generated_at")
+  goal        LearningGoal @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  tasks       PlanTask[]
+
+  @@index([goalId])
+  @@map("learning_plans")
+}
+
+model PlanTask {
+  id               Int          @id @default(autoincrement())
+  planId           Int          @map("plan_id")
+  topicId          Int          @map("topic_id")
+  taskType         TaskType     @map("task_type")
+  position         Int
+  scheduledDate    DateTime     @map("scheduled_date") @db.Date
+  estimatedMinutes Int          @map("estimated_minutes")
+  status           TaskStatus   @default(PENDING)
+  completedAt      DateTime?    @map("completed_at")
+  plan             LearningPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  topic            Topic        @relation(fields: [topicId], references: [id])
+
+  @@unique([planId, topicId, taskType])
+  @@index([planId, scheduledDate])
+  @@map("plan_tasks")
+}
+
+model UsageEvent {
+  id         Int       @id @default(autoincrement())
+  userId     Int?      @map("user_id")
+  eventType  EventType @map("event_type")
+  provider   String?
+  tokensUsed Int?      @map("tokens_used")
+  metadata   Json?
+  createdAt  DateTime  @default(now()) @map("created_at")
+  user       User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId, eventType, createdAt])
+  @@map("usage_events")
+}
