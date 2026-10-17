@@ -1,7 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { registerSchema, loginSchema } from './auth.schema';
-import { registerUser, loginUser, EmailAlreadyUsedError, InvalidCredentialsError } from './auth.service';
+import { registerUser, loginUser, getCurrentUser, EmailAlreadyUsedError, InvalidCredentialsError } from './auth.service';
 import { ZodError } from 'zod';
+import { requireAuth } from '../../middleware/requireAuth';
 
 const router = Router();
 
@@ -67,6 +68,25 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 
     console.error('Login error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.get('/me', requireAuth, async (req: Request, res: Response) => {
+  try {
+    if (!req.userId) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+
+    const user = await getCurrentUser(req.userId);
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid or expired token' });
+    }
+
+    return res.status(200).json({ data: user });
+  } catch (error) {
+    console.error('Get current user error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 });

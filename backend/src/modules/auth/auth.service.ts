@@ -55,3 +55,10 @@ export async function loginUser({ email, password }: LoginInput) {
     user: { id: user.id, name: user.name, email: user.email, createdAt: user.createdAt },
   };
 }
+
+export async function getCurrentUser(userId: number) {
+  return prisma.user.findUnique({
+    where: { id: userId },
+    select: { id: true, name: true, email: true, createdAt: true },
+  });
+}
