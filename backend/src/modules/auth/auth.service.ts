@@ -1,7 +1,9 @@
+import { requireEnv } from '../../lib/env';
 import bcrypt from 'bcrypt';
 import { Prisma } from '../../generated/prisma/client';
 import { prisma } from '../../lib/prisma';
-import type { RegisterInput } from './auth.schema';
+import type { RegisterInput, LoginInput } from './auth.schema';
+import jwt from 'jsonwebtoken';
 
 const SALT_ROUNDS = 12;
 
@@ -24,4 +26,32 @@ export async function registerUser({ name, email, password }: RegisterInput) {
     }
     throw error;
   }
+}
+
+const JWT_SECRET = requireEnv('JWT_SECRET');
+
+const DUMMY_HASH = bcrypt.hashSync('not-a-real-password', SALT_ROUNDS);
+
+export class InvalidCredentialsError extends Error {}
+
+export async function loginUser({ email, password }: LoginInput) {
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  const passwordMatches = await bcrypt.compare(
+    password,
+    user?.passwordHash ?? DUMMY_HASH,
+  );
+
+  if (!user || !passwordMatches) {
+    throw new InvalidCredentialsError();
+  }
+
+  const token = jwt.sign({ sub: String(user.id) }, JWT_SECRET, {
+    expiresIn: (process.env.JWT_EXPIRES_IN ?? '1d') as jwt.SignOptions['expiresIn'],
+  });
+
+  return {
+    token,
+    user: { id: user.id, name: user.name, email: user.email, createdAt: user.createdAt },
+  };
 }
