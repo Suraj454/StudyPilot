@@ -1,0 +1,35 @@
+
+id: 5
+title: "Call Stack and Event Loop"
+description: "Understand how JavaScript executes code, manages function calls, and handles asynchronous operations using the event loop and task queues."
+
+prerequisites:
+  - 1
+
+subtopics:
+  - id: 1
+    title: "How JavaScript Executes Code"
+
+  - id: 2
+    title: "Execution Context"
+
+  - id: 3
+    title: "The Call Stack"
+
+  - id: 4
+    title: "Synchronous vs Asynchronous Code"
+
+  - id: 5
+    title: "Browser APIs and the Runtime Environment"
+
+  - id: 6
+    title: "The Event Loop"
+
+  - id: 7
+    title: "Task Queue and Microtask Queue"
+
+  - id: 8
+    title: "Execution Order with setTimeout and Promises"
+
+  - id: 9
+    title: "Practical Execution Order Examples"

@@ -1,0 +1,28 @@
+
+id: 1
+title: "Scope, Hoisting and Closures"
+description: "Understand JavaScript scope, hoisting, and closures, including their practical use cases."
+
+prerequisites: []
+
+subtopics:
+  - id: 1
+    title: "var, let and const"
+
+  - id: 2
+    title: "Global, Function and Block Scope"
+
+  - id: 3
+    title: "Lexical Scope and Scope Chain"
+
+  - id: 4
+    title: "Hoisting"
+
+  - id: 5
+    title: "Temporal Dead Zone"
+
+  - id: 6
+    title: "Closures"
+
+  - id: 7
+    title: "Practical Closure Use Cases"

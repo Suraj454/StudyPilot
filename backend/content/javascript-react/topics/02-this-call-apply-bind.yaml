@@ -1,0 +1,32 @@
+
+id: 2
+title: "this, call, apply and bind"
+description: "Understand how the this keyword works in different contexts and how to explicitly control its value."
+
+prerequisites:
+  - 1
+
+subtopics:
+  - id: 1
+    title: "Understanding the this Keyword"
+
+  - id: 2
+    title: "this in Global and Function Contexts"
+
+  - id: 3
+    title: "this in Object Methods"
+
+  - id: 4
+    title: "this in Arrow Functions"
+
+  - id: 5
+    title: "The call Method"
+
+  - id: 6
+    title: "The apply Method"
+
+  - id: 7
+    title: "The bind Method"
+
+  - id: 8
+    title: "Practical Use Cases"

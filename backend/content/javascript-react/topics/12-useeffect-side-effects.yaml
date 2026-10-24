@@ -1,0 +1,42 @@
+
+id: 12
+title: "useEffect and Side Effects"
+description: "Understand how React's useEffect hook synchronizes components with external systems, manages dependencies, and performs cleanup."
+
+prerequisites:
+  - 6
+  - 11
+
+subtopics:
+  - id: 1
+    title: "What Are Side Effects?"
+
+  - id: 2
+    title: "Understanding the useEffect Hook"
+
+  - id: 3
+    title: "The Effect Setup Function"
+
+  - id: 4
+    title: "Understanding the Dependency Array"
+
+  - id: 5
+    title: "Running Effects After Rendering"
+
+  - id: 6
+    title: "Effect Cleanup Functions"
+
+  - id: 7
+    title: "Fetching API Data with useEffect"
+
+  - id: 8
+    title: "Handling Loading and Error States"
+
+  - id: 9
+    title: "Common useEffect Mistakes"
+
+  - id: 10
+    title: "Understanding Strict Mode and Effect Re-runs"
+
+  - id: 11
+    title: "When You Do Not Need useEffect"

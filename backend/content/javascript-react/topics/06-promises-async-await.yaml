@@ -1,0 +1,41 @@
+
+id: 6
+title: "Promises and async/await"
+description: "Understand how JavaScript handles asynchronous operations using promises and async/await, including chaining, error handling, and running multiple operations concurrently."
+
+prerequisites:
+  - 5
+
+subtopics:
+  - id: 1
+    title: "Understanding Asynchronous Operations"
+
+  - id: 2
+    title: "What Is a Promise?"
+
+  - id: 3
+    title: "Promise States"
+
+  - id: 4
+    title: "Creating and Consuming Promises"
+
+  - id: 5
+    title: "Promise Chaining"
+
+  - id: 6
+    title: "Error Handling with catch and finally"
+
+  - id: 7
+    title: "Understanding async and await"
+
+  - id: 8
+    title: "Error Handling with try and catch"
+
+  - id: 9
+    title: "Promise.all, Promise.allSettled, Promise.race and Promise.any"
+
+  - id: 10
+    title: "Sequential vs Parallel Execution"
+
+  - id: 11
+    title: "Practical API Request Examples"

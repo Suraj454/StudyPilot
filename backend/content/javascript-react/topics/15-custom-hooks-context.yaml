@@ -1,0 +1,41 @@
+
+id: 15
+title: "Custom Hooks and Context"
+description: "Learn how to extract reusable component logic into custom hooks and share data across components using React Context."
+
+prerequisites:
+  - 12
+
+subtopics:
+  - id: 1
+    title: "What Are Custom Hooks?"
+
+  - id: 2
+    title: "Rules of Hooks"
+
+  - id: 3
+    title: "Creating Your First Custom Hook"
+
+  - id: 4
+    title: "Sharing Logic Between Components"
+
+  - id: 5
+    title: "Understanding the Context API"
+
+  - id: 6
+    title: "Creating a Context"
+
+  - id: 7
+    title: "Using Context with useContext"
+
+  - id: 8
+    title: "Understanding Prop Drilling"
+
+  - id: 9
+    title: "Custom Hooks vs Context"
+
+  - id: 10
+    title: "Practical Examples: Authentication and Theme"
+
+  - id: 11
+    title: "Common Mistakes and Best Practices"

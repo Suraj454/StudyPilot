@@ -1,0 +1,35 @@
+
+id: 4
+title: "Array Methods, Immutability, Spread and Destructuring"
+description: "Learn to transform, filter, and process arrays, work with immutable data, and use spread syntax and destructuring with arrays and objects."
+
+prerequisites:
+  - 1
+
+subtopics:
+  - id: 1
+    title: "The map Method"
+
+  - id: 2
+    title: "The filter Method"
+
+  - id: 3
+    title: "The reduce Method"
+
+  - id: 4
+    title: "Other Useful Array Methods"
+
+  - id: 5
+    title: "Mutable vs Immutable Operations"
+
+  - id: 6
+    title: "Shallow Copy vs Deep Copy"
+
+  - id: 7
+    title: "Spread Syntax with Arrays and Objects"
+
+  - id: 8
+    title: "Array and Object Destructuring"
+
+  - id: 9
+    title: "Practical Use Cases in React"

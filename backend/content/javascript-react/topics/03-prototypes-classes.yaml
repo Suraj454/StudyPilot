@@ -1,0 +1,32 @@
+
+id: 3
+title: "Prototypes and Classes"
+description: "Understand JavaScript's prototype-based inheritance and how ES6 classes provide syntax for working with objects and inheritance."
+
+prerequisites:
+  - 2
+
+subtopics:
+  - id: 1
+    title: "Understanding Objects and Prototypes"
+
+  - id: 2
+    title: "The prototype Property"
+
+  - id: 3
+    title: "The Prototype Chain"
+
+  - id: 4
+    title: "Prototypal Inheritance"
+
+  - id: 5
+    title: "Constructor Functions"
+
+  - id: 6
+    title: "ES6 Classes and Constructors"
+
+  - id: 7
+    title: "Inheritance Using extends and super"
+
+  - id: 8
+    title: "Practical Use Cases"

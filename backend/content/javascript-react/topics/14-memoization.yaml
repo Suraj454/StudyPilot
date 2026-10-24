@@ -1,0 +1,39 @@
+
+id: 14
+title: "Memoization"
+description: "Understand React memoization techniques and how to optimize rendering and expensive calculations without adding unnecessary complexity."
+
+prerequisites:
+  - 12
+  - 13
+
+subtopics:
+  - id: 1
+    title: "What Is Memoization?"
+
+  - id: 2
+    title: "Understanding Referential Equality"
+
+  - id: 3
+    title: "Understanding React.memo"
+
+  - id: 4
+    title: "Understanding useMemo"
+
+  - id: 5
+    title: "Understanding useCallback"
+
+  - id: 6
+    title: "Memoizing Components vs Values vs Functions"
+
+  - id: 7
+    title: "Common Causes of Unnecessary Re-renders"
+
+  - id: 8
+    title: "When Memoization Is Useful"
+
+  - id: 9
+    title: "When Not to Use Memoization"
+
+  - id: 10
+    title: "Measuring Performance Before Optimizing"

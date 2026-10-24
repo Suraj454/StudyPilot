@@ -1,0 +1,38 @@
+
+id: 11
+title: "State and Re-rendering"
+description: "Understand how React manages component state, triggers re-renders, and updates the user interface when data changes."
+
+prerequisites:
+  - 10
+
+subtopics:
+  - id: 1
+    title: "Props vs State"
+
+  - id: 2
+    title: "Understanding the useState Hook"
+
+  - id: 3
+    title: "Declaring and Updating State"
+
+  - id: 4
+    title: "State Updates and Re-rendering"
+
+  - id: 5
+    title: "Why State Updates May Be Asynchronous"
+
+  - id: 6
+    title: "Functional State Updates"
+
+  - id: 7
+    title: "Updating Objects in State"
+
+  - id: 8
+    title: "Updating Arrays in State"
+
+  - id: 9
+    title: "State Preservation and Component Identity"
+
+  - id: 10
+    title: "Common State Management Mistakes"

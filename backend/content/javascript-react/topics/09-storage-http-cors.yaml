@@ -1,0 +1,41 @@
+
+id: 9
+title: "Storage, Cookies, HTTP Basics and CORS"
+description: "Understand browser storage, cookies, HTTP communication, status codes, and cross-origin security rules used in web applications."
+
+prerequisites:
+  - 8
+
+subtopics:
+  - id: 1
+    title: "localStorage and sessionStorage"
+
+  - id: 2
+    title: "Cookies and Their Uses"
+
+  - id: 3
+    title: "localStorage vs sessionStorage vs Cookies"
+
+  - id: 4
+    title: "HTTP Request and Response Basics"
+
+  - id: 5
+    title: "HTTP Methods: GET, POST, PUT, PATCH and DELETE"
+
+  - id: 6
+    title: "HTTP Status Codes"
+
+  - id: 7
+    title: "Headers, Request Body and Response Body"
+
+  - id: 8
+    title: "Understanding Same-Origin Policy"
+
+  - id: 9
+    title: "What Is CORS?"
+
+  - id: 10
+    title: "Common CORS Errors and How to Debug Them"
+
+  - id: 11
+    title: "Practical Examples with Frontend and Backend APIs"

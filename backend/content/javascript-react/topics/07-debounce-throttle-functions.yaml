@@ -1,0 +1,39 @@
+
+id: 7
+title: "Debounce, Throttle and Function Patterns"
+description: "Understand techniques for controlling function execution and learn reusable function patterns used in JavaScript applications."
+
+prerequisites:
+  - 1
+  - 5
+
+subtopics:
+  - id: 1
+    title: "Higher-Order Functions"
+
+  - id: 2
+    title: "Callback Functions"
+
+  - id: 3
+    title: "Debouncing"
+
+  - id: 4
+    title: "Implementing Debounce"
+
+  - id: 5
+    title: "Throttling"
+
+  - id: 6
+    title: "Implementing Throttle"
+
+  - id: 7
+    title: "Debounce vs Throttle"
+
+  - id: 8
+    title: "Currying"
+
+  - id: 9
+    title: "Function Composition"
+
+  - id: 10
+    title: "Practical Use Cases in Search Inputs and Event Handlers"

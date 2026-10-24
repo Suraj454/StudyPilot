@@ -1,0 +1,38 @@
+
+id: 10
+title: "Components, Props and JSX"
+description: "Understand React function components, JSX syntax, props, component composition, and conditional rendering to build reusable user interfaces."
+
+prerequisites:
+  - 4
+
+subtopics:
+  - id: 1
+    title: "What Is React and Why Use It?"
+
+  - id: 2
+    title: "Understanding React Function Components"
+
+  - id: 3
+    title: "JSX Syntax and Rules"
+
+  - id: 4
+    title: "Embedding JavaScript Expressions in JSX"
+
+  - id: 5
+    title: "Props and Passing Data Between Components"
+
+  - id: 6
+    title: "Default Values and Prop Destructuring"
+
+  - id: 7
+    title: "Component Composition"
+
+  - id: 8
+    title: "Conditional Rendering"
+
+  - id: 9
+    title: "Handling Events in React"
+
+  - id: 10
+    title: "Keeping Components Small and Reusable"

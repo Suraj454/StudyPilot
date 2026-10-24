@@ -1,0 +1,38 @@
+
+id: 13
+title: "Lists, Keys and Reconciliation"
+description: "Understand how React renders lists, why stable keys matter, and how reconciliation helps React update the user interface efficiently."
+
+prerequisites:
+  - 11
+
+subtopics:
+  - id: 1
+    title: "Rendering Lists with map"
+
+  - id: 2
+    title: "Rendering Arrays of Components"
+
+  - id: 3
+    title: "Understanding the key Prop"
+
+  - id: 4
+    title: "Why Array Indexes Can Be Poor Keys"
+
+  - id: 5
+    title: "Choosing Stable and Unique Keys"
+
+  - id: 6
+    title: "Conditional Rendering of Lists"
+
+  - id: 7
+    title: "Understanding the Virtual DOM Concept"
+
+  - id: 8
+    title: "React Reconciliation Basics"
+
+  - id: 9
+    title: "How Keys Affect Component State"
+
+  - id: 10
+    title: "Common List Rendering Mistakes"

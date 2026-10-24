@@ -1,0 +1,37 @@
+
+id: 8
+title: "DOM Events and Event Delegation"
+description: "Understand how browser events work, how events propagate through the DOM, and how event delegation helps manage events efficiently."
+
+prerequisites: []
+
+subtopics:
+  - id: 1
+    title: "Understanding the DOM"
+
+  - id: 2
+    title: "Selecting and Manipulating DOM Elements"
+
+  - id: 3
+    title: "Understanding Browser Events"
+
+  - id: 4
+    title: "Event Listeners and addEventListener"
+
+  - id: 5
+    title: "Event Bubbling"
+
+  - id: 6
+    title: "Event Capturing"
+
+  - id: 7
+    title: "Event Delegation"
+
+  - id: 8
+    title: "The event Target and currentTarget Properties"
+
+  - id: 9
+    title: "preventDefault and stopPropagation"
+
+  - id: 10
+    title: "Practical Event Handling Examples"
