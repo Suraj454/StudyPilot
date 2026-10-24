@@ -1,30 +1,19 @@
-import { useEffect, useState } from 'react';
-
-type Health = { status: string; database: string };
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { Routes, Route } from 'react-router';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const [health, setHealth] = useState<Health | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch(`${API_URL}/api/health`)
-      .then((res) => res.json())
-      .then((data: Health) => setHealth(data))
-      .catch((err) => {
-        console.error('Health check failed:', err);
-        setError('Cannot reach the API');
-      });
-  }, []);
-
-  if (error) return <p>{error}</p>;
-  if (!health) return <p>Checking...</p>;
-
   return (
-    <p>
-      API: {health.status} · Database: {health.database}
-    </p>
+    <Routes>
+      {/* <Route path="/" element={<Home />} /> */}
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<DashboardPage />} />
+      </Route>
+    </Routes>
   );
 }
 
