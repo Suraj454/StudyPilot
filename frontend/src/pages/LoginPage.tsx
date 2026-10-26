@@ -7,6 +7,7 @@ import { emailSchema, loginPasswordSchema, firstError } from '../lib/validation'
 import { AuthLayout } from '../components/AuthLayout';
 import { TextField } from '../components/TextField';
 import { Button } from '../components/Button';
+import { Zap, BarChart3, Clock } from 'lucide-react';
 
 type LoginBody = { email: string; password: string };
 type Field = 'email' | 'password';
@@ -81,14 +82,23 @@ export default function LoginPage() {
         : undefined;
 
   return (
-    <AuthLayout
+<AuthLayout
       title="Welcome back"
       subtitle="Pick up where you left off"
-      panelHeadline="Pick up where you left off"
+      panelHeadline="Pick up right where your engineering growth paused"
       panelPoints={[
-        'Your study plan and target date',
-        'Your quiz scores and weak topics',
-        'Your next tasks, ready to go',
+        {
+          icon: <Zap className="w-5 h-5 text-primary" />,
+          text: 'Your personalized study plan and target interview date',
+        },
+        {
+          icon: <BarChart3 className="w-5 h-5 text-primary" />,
+          text: 'Deep-dive analytics on your quiz scores and weak topics',
+        },
+        {
+          icon: <Clock className="w-5 h-5 text-primary" />,
+          text: 'Your next immediate tasks, primed and ready to go',
+        },
       ]}
     >
       <form onSubmit={handleSubmit} noValidate className="space-y-4">

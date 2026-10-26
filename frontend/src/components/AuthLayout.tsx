@@ -1,43 +1,78 @@
 import type { ReactNode } from 'react';
+import { Sparkles, Target, TrendingUp } from 'lucide-react';
+
+export type PanelPoint = {
+  icon: ReactNode;
+  text: string;
+};
 
 type Props = {
   title: string;
   subtitle?: string;
   panelHeadline?: string;
-  panelPoints?: string[];
+  panelPoints?: PanelPoint[];
   children: ReactNode;
 };
 
-const defaultPoints = [
-  'Discover your strengths and knowledge gaps',
-  'Get a personalized plan for your target date',
-  'Practice with quizzes and track your progress',
+const defaultPoints: PanelPoint[] = [
+  {
+    icon: <Sparkles className="w-5 h-5 text-primary" />,
+    text: 'Comprehensive structured modules tailored for engineers',
+  },
+  {
+    icon: <Target className="w-5 h-5 text-primary" />,
+    text: 'Diagnostic quizzes to target your exact knowledge gaps',
+  },
+  {
+    icon: <TrendingUp className="w-5 h-5 text-primary" />,
+    text: 'Real-time progress tracking to stay interview-ready',
+  },
 ];
 
 export function AuthLayout({
   title,
   subtitle,
-  panelHeadline = 'A personalized learning planner for IT developers',
+  panelHeadline = 'Your AI-powered roadmap to engineering excellence',
   panelPoints = defaultPoints,
   children,
 }: Props) {
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
-      <aside className="hidden flex-col justify-center bg-primary p-12 text-white lg:flex">
-        <h1 className="text-4xl font-bold">StudyPilot</h1>
-        <p className="mt-2 text-lg opacity-90">{panelHeadline}</p>
-        <ul className="mt-8 space-y-3">
-          {panelPoints.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-        </ul>
+    <div className="grid min-h-screen lg:grid-cols-2 bg-page text-ink">
+      {/* Left Panel: Neon Cyber Gradient & Glow */}
+      <aside className="hidden flex-col justify-center bg-gradient-to-br from-[#0F172A] via-[#070A12] to-[#020408] p-12 lg:flex border-r border-line relative overflow-hidden">
+        {/* Decorative neon glow accents */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-md">
+          <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-surface/80 border border-line rounded-full shadow-sm">
+            Developer Learning Platform
+          </div>
+          <h1 className="text-4xl font-extrabold tracking-tight text-ink">StudyPilot</h1>
+          <p className="mt-3 text-lg text-muted leading-relaxed">{panelHeadline}</p>
+          
+          <ul className="mt-8 space-y-4">
+            {panelPoints.map((point, index) => (
+              <li 
+                key={index}
+                className="flex items-center gap-3.5 p-4 rounded-xl bg-surface/50 border border-line backdrop-blur-sm text-ink shadow-sm transition-colors hover:border-primary/50"
+              >
+                <div className="flex-shrink-0">{point.icon}</div>
+                <span className="text-sm font-medium">{point.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </aside>
 
-      <main className="flex items-center justify-center p-6">
-        <div className="w-full max-w-sm">
-          <h2 className="text-2xl font-bold">{title}</h2>
-          {subtitle && <p className="mt-1 text-muted">{subtitle}</p>}
-          <div className="mt-6">{children}</div>
+      {/* Right Panel: Pure black background with card container */}
+      <main className="flex items-center justify-center p-6 bg-[#030712]">
+        <div className="w-full max-w-md p-8 rounded-2xl bg-[#030712] border border-line shadow-2xl">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold tracking-tight text-ink">{title}</h2>
+            {subtitle && <p className="mt-1 text-sm text-muted">{subtitle}</p>}
+          </div>
+          <div>{children}</div>
         </div>
       </main>
     </div>

@@ -1,43 +1,21 @@
-/* 
-@import "tailwindcss";
-
-@theme {
-  --color-primary: #818CF8;
-  --color-primary-hover: #A5B4FC;
-  --color-page: #0B0F19;
-  --color-surface: #151B2B;
-  --color-ink: #F1F5F9;
-  --color-muted: #94A3B8;
-  --color-line: #293246;
-  --color-danger: #F87171;
-  --color-success: #4ADE80;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
-
-@layer base {
-  body {
-    @apply bg-page font-sans text-ink antialiased;
-  }
-} */
-
 @import "tailwindcss";
 
 @theme {
   /* Primary accent */
-  --color-primary: #818CF8;
-  --color-primary-hover: #A5B4FC;
+  --color-primary: #6366F1;
+  --color-primary-hover: #818CF8;
 
-  /* Dark theme backgrounds */
-  --color-page: #0B1020;
-  --color-surface: #141B2D;
-  --color-surface-hover: #1B2540;
+  /* Dark theme backgrounds - Deep obsidian & sleek slate */
+  --color-page: #030712;
+  --color-surface: #0F172A;
+  --color-surface-hover: #1E293B;
 
   /* Text */
-  --color-ink: #F1F5F9;
+  --color-ink: #F8FAFC;
   --color-muted: #94A3B8;
 
   /* Borders and feedback */
-  --color-line: #2A3550;
+  --color-line: #1E293B;
   --color-danger: #F87171;
   --color-success: #4ADE80;
 
@@ -78,7 +56,7 @@
   }
 
   ::selection {
-    background: #818CF8;
-    color: #0B1020;
+    background: #6366F1;
+    color: #030712;
   }
 }
