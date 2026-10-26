@@ -38,14 +38,15 @@ export function AuthLayout({
 }: Props) {
   return (
     <div className="grid min-h-screen lg:grid-cols-2 bg-page text-ink">
-      {/* Left Panel: Neon Cyber Gradient & Glow */}
-      <aside className="hidden flex-col justify-center bg-gradient-to-br from-[#0F172A] via-[#070A12] to-[#020408] p-12 lg:flex border-r border-line relative overflow-hidden">
-        {/* Decorative neon glow accents */}
+      {/* Left Panel: Fully filled uniform primary tint */}
+      <aside className="hidden flex-col justify-center bg-primary/[0.06] p-12 lg:flex border-r border-line relative overflow-hidden">
+        
+        {/* Soft atmospheric ambient glow accents */}
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-md">
-          <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-surface/80 border border-line rounded-full shadow-sm">
+          <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-surface border border-primary/20 rounded-full shadow-sm">
             Developer Learning Platform
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight text-ink">StudyPilot</h1>
@@ -55,19 +56,19 @@ export function AuthLayout({
             {panelPoints.map((point, index) => (
               <li 
                 key={index}
-                className="flex items-center gap-3.5 p-4 rounded-xl bg-surface/50 border border-line backdrop-blur-sm text-ink shadow-sm transition-colors hover:border-primary/50"
+                className="flex items-center gap-3.5 p-4 rounded-xl bg-surface border border-line shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
               >
                 <div className="flex-shrink-0">{point.icon}</div>
-                <span className="text-sm font-medium">{point.text}</span>
+                <span className="text-sm font-medium text-ink">{point.text}</span>
               </li>
             ))}
           </ul>
         </div>
       </aside>
 
-      {/* Right Panel: Pure black background with card container */}
-      <main className="flex items-center justify-center p-6 bg-[#030712]">
-        <div className="w-full max-w-md p-8 rounded-2xl bg-[#030712] border border-line shadow-2xl">
+      {/* Right Panel: Clean soft page background with elevated white card */}
+      <main className="flex items-center justify-center p-6 bg-page">
+        <div className="w-full max-w-md p-8 rounded-2xl bg-surface border border-line shadow-xl">
           <div className="mb-6">
             <h2 className="text-2xl font-bold tracking-tight text-ink">{title}</h2>
             {subtitle && <p className="mt-1 text-sm text-muted">{subtitle}</p>}

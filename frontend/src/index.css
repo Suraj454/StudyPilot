@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* Primary accent */
-  --color-primary: #6366F1;
-  --color-primary-hover: #818CF8;
+  /* Primary accent - vibrant electric indigo */
+  --color-primary: #4F46E5;
+  --color-primary-hover: #4338CA;
 
-  /* Dark theme backgrounds - Deep obsidian & sleek slate */
-  --color-page: #030712;
-  --color-surface: #0F172A;
-  --color-surface-hover: #1E293B;
+  /* Soft Light Theme backgrounds - Warm paper & subtle surfaces */
+  --color-page: #FAF9F6;          /* Soft warm off-white (not blinding) */
+  --color-surface: #FFFFFF;        /* Crisp card surface */
+  --color-surface-hover: #F4F3EF;  /* Subtle hover */
 
-  /* Text */
-  --color-ink: #F8FAFC;
-  --color-muted: #94A3B8;
+  /* Text - Deep slate for high legibility without harsh black */
+  --color-ink: #1C1917;          /* Soft dark stone */
+  --color-muted: #78716C;        /* Muted warm gray */
 
   /* Borders and feedback */
-  --color-line: #1E293B;
-  --color-danger: #F87171;
-  --color-success: #4ADE80;
+  --color-line: #E7E5E4;         /* Soft warm border */
+  --color-danger: #DC2626;
+  --color-success: #16A34A;
 
   /* Typography */
   --font-sans: ui-sans-serif, system-ui, -apple-system,
@@ -36,7 +36,7 @@
   input,
   textarea,
   select {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   input::placeholder,
@@ -56,7 +56,7 @@
   }
 
   ::selection {
-    background: #6366F1;
-    color: #030712;
+    background: #4F46E5;
+    color: #FFFFFF;
   }
 }
