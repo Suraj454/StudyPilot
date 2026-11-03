@@ -1,4 +1,3 @@
-
 id: 12
 title: "useEffect and Side Effects"
 description: "Understand how React's useEffect hook synchronizes components with external systems, manages dependencies, and performs cleanup."
@@ -10,33 +9,118 @@ prerequisites:
 subtopics:
   - id: 1
     title: "What Are Side Effects?"
-
   - id: 2
     title: "Understanding the useEffect Hook"
-
   - id: 3
     title: "The Effect Setup Function"
-
   - id: 4
     title: "Understanding the Dependency Array"
-
   - id: 5
     title: "Running Effects After Rendering"
-
   - id: 6
     title: "Effect Cleanup Functions"
-
   - id: 7
     title: "Fetching API Data with useEffect"
-
   - id: 8
     title: "Handling Loading and Error States"
-
   - id: 9
     title: "Common useEffect Mistakes"
-
   - id: 10
     title: "Understanding Strict Mode and Effect Re-runs"
-
   - id: 11
     title: "When You Do Not Need useEffect"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What is the primary purpose of the `useEffect` hook in React?"
+    options:
+      - "To perform state updates synchronously during the render phase"
+      - "To synchronize a component with an external system or side effect (such as data fetching, subscriptions, or DOM manipulation)"
+      - "To replace JavaScript's built-in array methods like map and filter"
+      - "To manage application-wide global theme styling"
+    correctAnswer: "To synchronize a component with an external system or side effect (such as data fetching, subscriptions, or DOM manipulation)"
+    explanation: "`useEffect` lets you execute code after rendering to synchronize your component with systems outside of React's pure rendering lifecycle."
+    type: "DIAGNOSTIC"
+
+  - questionText: "What happens when you omit the dependency array entirely from a `useEffect` call?"
+    options:
+      - "The effect runs only once when the component mounts."
+      - "The effect runs after every single render of the component."
+      - "React throws a compilation error."
+      - "The effect never runs at all."
+    correctAnswer: "The effect runs after every single render of the component."
+    explanation: "Without a dependency array, React cannot skip execution, causing the effect function to run after initial mount and after every subsequent re-render."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What is the purpose of returning a cleanup function inside `useEffect`?
+      ```jsx
+      useEffect(() => {
+        const timer = setInterval(() => console.log('tick'), 1000);
+        return () => clearInterval(timer);
+      }, []);
+      ```
+    options:
+      - "To clear subscriptions, timers, or event listeners when the component unmounts or before the effect runs again."
+      - "To force an immediate re-render of the parent component."
+      - "To reset state variables back to their initial default values."
+      - "To catch asynchronous syntax errors."
+    correctAnswer: "To clear subscriptions, timers, or event listeners when the component unmounts or before the effect runs again."
+    explanation: "Cleanup functions prevent memory leaks and stale subscription bugs by cleaning up side effects when a component unmounts or dependencies change."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the data fetching effect below. What is a major bug in this implementation?
+      ```jsx
+      useEffect(() => {
+        fetch(`[https://api.example.com/user/$](https://api.example.com/user/$){userId}`)
+          .then(res => res.json())
+          .then(data => setUser(data));
+      }, []);
+      ```
+    options:
+      - "It causes an infinite loop because `setUser` is called inside the effect."
+      - "It misses `userId` in the dependency array, causing the UI to show stale data if `userId` prop changes."
+      - "It violates CSS rendering rules."
+      - "It throws a syntax error on fetch."
+    correctAnswer: "It misses `userId` in the dependency array, causing the UI to show stale data if `userId` prop changes."
+    explanation: "Any reactive values (like props or state) used inside an effect must be included in the dependency array so the effect re-runs when they change."
+    type: "QUIZ"
+
+  - questionText: "Why do effects run twice on mount in React Strict Mode during development?"
+    options:
+      - "To test whether component effects are resilient to being unmounted and re-mounted (checking cleanup implementation)."
+      - "To double database write performance."
+      - "To automatically fix infinite loop bugs in user code."
+      - "Because of a known memory leak in the browser engine."
+    correctAnswer: "To test whether component effects are resilient to being unmounted and re-mounted (checking cleanup implementation)."
+    explanation: "React Strict Mode simulates unmounting and re-mounting in development to help developers catch missing cleanup functions."
+    type: "QUIZ"
+
+  - questionText: |
+      What will happen if you put an object or array directly into the dependency array without memoization?
+      ```jsx
+      const options = { filter: 'active' };
+      useEffect(() => {
+        loadData(options);
+      }, [options]);
+      ```
+    options:
+      - "The effect will run on every single re-render because object references are compared by equality (`{}` !== `{}`)."
+      - "The effect will never run."
+      - "It triggers a TypeScript compile error."
+      - "React automatically deep-compares the object properties."
+    correctAnswer: "The effect will run on every single re-render because object references are compared by equality (`{}` !== `{}`)."
+    explanation: "React uses shallow referential equality (`Object.is`). A newly created object literal on every render has a new memory reference, causing the effect to trigger infinitely."
+    type: "QUIZ"
+
+  - questionText: "When is `useEffect` *not* needed?"
+    options:
+      - "When transforming data for display based on existing props or state (which should be done during rendering)"
+      - "When communicating with external APIs"
+      - "When setting up manual browser event listeners"
+      - "When establishing WebSocket subscriptions"
+    correctAnswer: "When transforming data for display based on existing props or state (which should be done during rendering)"
+    explanation: "You do not need an effect just to transform state data for rendering; calculate it directly in the component body to avoid unnecessary extra render passes."
+    type: "QUIZ"

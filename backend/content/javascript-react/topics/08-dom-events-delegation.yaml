@@ -1,4 +1,3 @@
-
 id: 8
 title: "DOM Events and Event Delegation"
 description: "Understand how browser events work, how events propagate through the DOM, and how event delegation helps manage events efficiently."
@@ -8,30 +7,112 @@ prerequisites: []
 subtopics:
   - id: 1
     title: "Understanding the DOM"
-
   - id: 2
     title: "Selecting and Manipulating DOM Elements"
-
   - id: 3
     title: "Understanding Browser Events"
-
   - id: 4
     title: "Event Listeners and addEventListener"
-
   - id: 5
     title: "Event Bubbling"
-
   - id: 6
     title: "Event Capturing"
-
   - id: 7
     title: "Event Delegation"
-
   - id: 8
     title: "The event Target and currentTarget Properties"
-
   - id: 9
     title: "preventDefault and stopPropagation"
-
   - id: 10
     title: "Practical Event Handling Examples"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What is event bubbling in the DOM event lifecycle?"
+    options:
+      - "The event travels from the window down through the target element."
+      - "The event starts at the target element and bubbles up through its ancestors to the root."
+      - "The event is cached in the browser's memory buffer."
+      - "The event fires simultaneously on all elements across the page."
+    correctAnswer: "The event starts at the target element and bubbles up through its ancestors to the root."
+    explanation: "During the bubbling phase, an event triggered on a child element propagates upward through its parent elements all the way to `document`."
+    type: "DIAGNOSTIC"
+
+  - questionText: "What is the primary benefit of using event delegation?"
+    options:
+      - "It completely prevents asynchronous race conditions."
+      - "It allows a single event listener on a common ancestor to manage events for multiple current or future child elements efficiently."
+      - "It automatically stops all event propagation by default."
+      - "It bypasses the browser's render tree reconciliation."
+    correctAnswer: "It allows a single event listener on a common ancestor to manage events for multiple current or future child elements efficiently."
+    explanation: "Event delegation reduces memory overhead and automatically handles dynamically added child elements without needing separate listeners."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What is the difference between `event.target` and `event.currentTarget` in an event handler?
+      ```javascript
+      // Given: parent element with a child button inside
+      parent.addEventListener('click', (event) => {
+        console.log(event.target, event.currentTarget);
+      });
+      ```
+    options:
+      - "`event.target` is the element that triggered the event (the button), while `event.currentTarget` is the element the listener is attached to (the parent)."
+      - "They always reference the exact same DOM node."
+      - "`event.target` refers to the window, while `event.currentTarget` refers to the document."
+      - "`event.target` is read-only, whereas `event.currentTarget` can be reassigned."
+    correctAnswer: "`event.target` is the element that triggered the event (the button), while `event.currentTarget` is the element the listener is attached to (the parent)."
+    explanation: "`target` is the actual DOM node clicked, whereas `currentTarget` is the element whose event listener is currently executing."
+    type: "QUIZ"
+
+  - questionText: "What does calling `event.preventDefault()` accomplish?"
+    options:
+      - "It stops the event from propagating further up or down the DOM tree."
+      - "It cancels the browser's default behavior associated with the event (like form submission or link navigation)."
+      - "It destroys the event listener immediately."
+      - "It converts a bubble phase event into a capture phase event."
+    correctAnswer: "It cancels the browser's default behavior associated with the event (like form submission or link navigation)."
+    explanation: "`preventDefault()` prevents browser defaults (such as navigating on an `<a>` click or reloading on a `<form>` submit), whereas `stopPropagation()` stops bubbling."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the following listener setup. In what order do the logs appear when clicking a button inside the container?
+      ```javascript
+      container.addEventListener('click', () => console.log('Container'), true);
+      button.addEventListener('click', () => console.log('Button'));
+      ```
+    options:
+      - "Button, Container"
+      - "Container, Button"
+      - "Button only"
+      - "Container only"
+    correctAnswer: "Container, Button"
+    explanation: "Passing `true` as the third argument to `addEventListener` registers the listener during the **capturing phase**, which fires before the target element's listener during bubbling."
+    type: "QUIZ"
+
+  - questionText: "How can you prevent an event from bubbling up to parent elements?"
+    options:
+      - "event.stopPropagation()"
+      - "event.preventDefault()"
+      - "event.cancelBubble = false"
+      - "event.stopImmediateExecution()"
+    correctAnswer: "event.stopPropagation()"
+    explanation: "`event.stopPropagation()` prevents the event from moving further along the bubbling or capturing path."
+    type: "QUIZ"
+
+  - questionText: |
+      When implementing event delegation for a list of items (`<ul>` containing `<li>` elements), how do you identify which specific item was clicked?
+      ```javascript
+      ul.addEventListener('click', (event) => {
+        // How to check the clicked li?
+      });
+      ```
+    options:
+      - "Check `event.target.closest('li')` to find the matching ancestor list item."
+      - "Read `event.currentTarget.children[0]` directly."
+      - "Use `event.explicitOriginalTarget`."
+      - "Inspect the global window event stack."
+    correctAnswer: "Check `event.target.closest('li')` to find the matching ancestor list item."
+    explanation: "`element.closest()` traverses the element and its parents (heading toward the root) until it finds a node that matches the provided CSS selector."
+    type: "QUIZ"

@@ -1,4 +1,3 @@
-
 id: 3
 title: "Prototypes and Classes"
 description: "Understand JavaScript's prototype-based inheritance and how ES6 classes provide syntax for working with objects and inheritance."
@@ -9,24 +8,119 @@ prerequisites:
 subtopics:
   - id: 1
     title: "Understanding Objects and Prototypes"
-
   - id: 2
     title: "The prototype Property"
-
   - id: 3
     title: "The Prototype Chain"
-
   - id: 4
     title: "Prototypal Inheritance"
-
   - id: 5
     title: "Constructor Functions"
-
   - id: 6
     title: "ES6 Classes and Constructors"
-
   - id: 7
     title: "Inheritance Using extends and super"
-
   - id: 8
     title: "Practical Use Cases"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What is the prototype chain in JavaScript used for?"
+    options:
+      - "Managing asynchronous task queues in the event loop"
+      - "Resolving property and method lookups dynamically across linked objects"
+      - "Encrypting private class fields"
+      - "Structuring React component trees"
+    correctAnswer: "Resolving property and method lookups dynamically across linked objects"
+    explanation: "When trying to access a property that doesn't exist on an object, JavaScript walks up its prototype chain until it finds the property or reaches `null`."
+    type: "DIAGNOSTIC"
+
+  - questionText: "How do ES6 classes relate to JavaScript's underlying prototype system?"
+    options:
+      - "ES6 classes completely replace prototypes with a traditional class-based model."
+      - "ES6 classes are syntactic sugar over JavaScript's existing prototypal inheritance."
+      - "ES6 classes can only be used with TypeScript compilation."
+      - "ES6 classes run faster because they bypass prototypes entirely."
+    correctAnswer: "ES6 classes are syntactic sugar over JavaScript's existing prototypal inheritance."
+    explanation: "Under the hood, ES6 classes use prototype-based inheritance; `class` is cleaner syntax for writing constructor functions and setting up prototypes."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What will be the output of the following code snippet?
+      ```javascript
+      const animal = { eats: true };
+      const rabbit = Object.create(animal);
+      rabbit.jumps = true;
+
+      console.log(rabbit.eats);
+      console.log(rabbit.hasOwnProperty('eats'));
+      ```
+    options:
+      - "true, true"
+      - "true, false"
+      - "undefined, false"
+      - '"true, true" (with prototype error)'
+    correctAnswer: "true, false"
+    explanation: "`rabbit.eats` resolves to `true` by looking up the prototype chain (`animal`), but `hasOwnProperty` returns `false` because `eats` belongs to the prototype, not `rabbit` directly."
+    type: "QUIZ"
+
+  - questionText: "Which property points to an object's prototype in modern JavaScript environments?"
+    options:
+      - "__proto__ (or Object.getPrototypeOf())"
+      - "prototypeChain"
+      - "parentObject"
+      - "superPrototype"
+    correctAnswer: "__proto__ (or Object.getPrototypeOf())"
+    explanation: "Every object has an internal `[[Prototype]]` link accessible via `__proto__` or `Object.getPrototypeOf()`."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the class inheritance snippet below. What happens when `new Dog().speak()` is called?
+      ```javascript
+      class Animal {
+        speak() { return 'Some sound'; }
+      }
+      class Dog extends Animal {
+        speak() { return 'Bark'; }
+      }
+      ```
+    options:
+      - "It returns 'Some sound'"
+      - "It returns 'Bark'"
+      - "It throws a ReferenceError"
+      - "It returns undefined"
+    correctAnswer: "It returns 'Bark'"
+    explanation: "Method overriding allows the subclass (`Dog`) to override a method inherited from its superclass (`Animal`)."
+    type: "QUIZ"
+
+  - questionText: "What is the purpose of the `super()` call inside a subclass constructor in ES6?"
+    options:
+      - "To allocate memory for a new object instance"
+      - "To call the parent class constructor and initialize inherited properties"
+      - "To convert regular functions into arrow functions"
+      - "To export the class to external modules"
+    correctAnswer: "To call the parent class constructor and initialize inherited properties"
+    explanation: "In a derived class, `super()` must be called before accessing `this` to execute the parent class constructor."
+    type: "QUIZ"
+
+  - questionText: |
+      What will be printed by the following code?
+      ```javascript
+      function User(name) {
+        this.name = name;
+      }
+      User.prototype.sayHi = function() {
+        return `Hi, ${this.name}`;
+      };
+      const user1 = new User('Alice');
+      console.log(user1.sayHi());
+      ```
+    options:
+      - "TypeError: user1.sayHi is not a function"
+      - "Hi, Alice"
+      - "Hi, undefined"
+      - "ReferenceError"
+    correctAnswer: "Hi, Alice"
+    explanation: "Methods defined on `User.prototype` are shared and accessible by all instances created with `new User()`, so `user1.sayHi()` executes successfully."
+    type: "QUIZ"

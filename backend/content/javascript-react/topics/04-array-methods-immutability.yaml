@@ -1,4 +1,3 @@
-
 id: 4
 title: "Array Methods, Immutability, Spread and Destructuring"
 description: "Learn to transform, filter, and process arrays, work with immutable data, and use spread syntax and destructuring with arrays and objects."
@@ -9,27 +8,111 @@ prerequisites:
 subtopics:
   - id: 1
     title: "The map Method"
-
   - id: 2
     title: "The filter Method"
-
   - id: 3
     title: "The reduce Method"
-
   - id: 4
     title: "Other Useful Array Methods"
-
   - id: 5
     title: "Mutable vs Immutable Operations"
-
   - id: 6
     title: "Shallow Copy vs Deep Copy"
-
   - id: 7
     title: "Spread Syntax with Arrays and Objects"
-
   - id: 8
     title: "Array and Object Destructuring"
-
   - id: 9
     title: "Practical Use Cases in React"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "Which array method should you use to transform every element of an array into a new array of the same length?"
+    options:
+      - "filter()"
+      - "reduce()"
+      - "map()"
+      - "forEach()"
+    correctAnswer: "map()"
+    explanation: "`map()` creates a brand-new array populated with the results of calling a provided function on every element in the calling array."
+    type: "DIAGNOSTIC"
+
+  - questionText: "Why is data immutability emphasized in modern frontend libraries like React?"
+    options:
+      - "It ensures that objects take up less memory in the browser heap."
+      - "It allows React to efficiently detect state changes and trigger reliable re-renders."
+      - "It prevents JavaScript from throwing syntax errors during compilation."
+      - "It replaces the need for asynchronous network requests."
+    correctAnswer: "It allows React to efficiently detect state changes and trigger reliable re-renders."
+    explanation: "Immutability makes state changes predictable and enables fast reference equality checks (`===`) during reconciliation."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What will be the output of the following code snippet?
+      ```javascript
+      const numbers = [1, 2, 3, 4];
+      const result = numbers.reduce((acc, curr) => acc + curr, 10);
+      console.log(result);
+      ```
+    options:
+      - "10"
+      - "20"
+      - "14"
+      - "24"
+    correctAnswer: "20"
+    explanation: "The initial value of the accumulator (`acc`) is set to `10`. Summing elements `1 + 2 + 3 + 4` equals `10`, plus the initial accumulator `10` gives a total of `20`."
+    type: "QUIZ"
+
+  - questionText: "Which of the following array methods modifies the original array in place (mutates it) instead of returning a new array?"
+    options:
+      - "map()"
+      - "filter()"
+      - "sort()"
+      - "concat()"
+    correctAnswer: "sort()"
+    explanation: "`sort()` (along with `splice()` and `push()`) mutates the original array in place, whereas `map`, `filter`, and `concat` return new arrays."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the object spreading snippet below. What will `updatedUser.address.city` be?
+      ```javascript
+      const user = { name: 'Alice', address: { city: 'New York' } };
+      const updatedUser = { ...user, name: 'Bob' };
+      updatedUser.address.city = 'London';
+      console.log(user.address.city);
+      ```
+    options:
+      - "New York"
+      - "London"
+      - "undefined"
+      - "TypeError"
+    correctAnswer: "London"
+    explanation: "Object spread (`...`) performs a **shallow copy**. Nested objects like `address` are still shared by reference between `user` and `updatedUser`, so mutating `updatedUser.address.city` mutates the original `user` object as well."
+    type: "QUIZ"
+
+  - questionText: "How can you extract the first element of an array and assign the remaining elements into a new array using destructuring?"
+    options:
+      - "const [first, ...rest] = array;"
+      - "const [first, rest...] = array;"
+      - "const {first, rest} = array;"
+      - "const [first, slice(rest)] = array;"
+    correctAnswer: "const [first, ...rest] = array;"
+    explanation: "The rest syntax (`...rest`) collects all remaining array elements into a new array after the initial destructuring assignments."
+    type: "QUIZ"
+
+  - questionText: |
+      What will be logged by the following destructuring snippet with default values?
+      ```javascript
+      const settings = { theme: 'dark' };
+      const { theme, notifications = true } = settings;
+      console.log(theme, notifications);
+      ```
+    options:
+      - "dark, false"
+      - "dark, true"
+      - "undefined, true"
+      - "TypeError"
+    correctAnswer: "dark, true"
+    explanation: "Default values in destructuring (e.g., `notifications = true`) are only applied if the extracted property is `undefined` in the source object."
+    type: "QUIZ"

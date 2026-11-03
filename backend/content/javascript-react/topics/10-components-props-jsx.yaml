@@ -1,4 +1,3 @@
-
 id: 10
 title: "Components, Props and JSX"
 description: "Understand React function components, JSX syntax, props, component composition, and conditional rendering to build reusable user interfaces."
@@ -9,30 +8,119 @@ prerequisites:
 subtopics:
   - id: 1
     title: "What Is React and Why Use It?"
-
   - id: 2
     title: "Understanding React Function Components"
-
   - id: 3
     title: "JSX Syntax and Rules"
-
   - id: 4
     title: "Embedding JavaScript Expressions in JSX"
-
   - id: 5
     title: "Props and Passing Data Between Components"
-
   - id: 6
     title: "Default Values and Prop Destructuring"
-
   - id: 7
     title: "Component Composition"
-
   - id: 8
     title: "Conditional Rendering"
-
   - id: 9
     title: "Handling Events in React"
-
   - id: 10
     title: "Keeping Components Small and Reusable"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What is JSX in the context of React development?"
+    options:
+      - "A strict database query language used by Prisma"
+      - "A syntax extension for JavaScript that allows writing HTML-like code inside JS files"
+      - "A styling preprocessor that replaces CSS modules"
+      - "An external build-time compiler for PostgreSQL schemas"
+    correctAnswer: "A syntax extension for JavaScript that allows writing HTML-like code inside JS files"
+    explanation: "JSX produces React 'elements' that get compiled down to standard JavaScript function calls (`React.createElement`) by tools like Babel."
+    type: "DIAGNOSTIC"
+
+  - questionText: "How are `props` passed from a parent component to a child component in React?"
+    options:
+      - "As read-only attributes resembling HTML attributes on the component tag"
+      - "As globally mutable variables stored in window state"
+      - "Through CSS custom properties injected at runtime"
+      - "Using asynchronous event emitters exclusively"
+    correctAnswer: "As read-only attributes resembling HTML attributes on the component tag"
+    explanation: "Props are immutable parameters passed down from parent components, flowing in a strict unidirectional data flow."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What will be the output rendered by the following JSX component snippet?
+      ```jsx
+      function Greeting({ name = 'Guest' }) {
+        return <div>Hello, {name}</div>;
+      }
+      // Rendered as: <Greeting name/>
+      ```
+    options:
+      - "Hello, Guest"
+      - '"Hello, " (empty string)'
+      - "Hello, undefined"
+      - "TypeError"
+    correctAnswer: '"Hello, " (empty string)'
+    explanation: 'Default parameters in JS destructuring (e.g., name = "Guest") only trigger if the argument is explicitly undefined. Passing an empty string "" treats it as a defined falsy value, overriding the default.'
+    type: "QUIZ"
+
+  - questionText: "Which JSX rule must be followed when returning multiple root elements from a component function?"
+    options:
+      - "They must be separated by comma operators."
+      - "They must be wrapped inside a single parent element or a React Fragment (`<>...</>`)."
+      - "They must be converted into string templates first."
+      - "They must be declared inside global window variables."
+    correctAnswer: "They must be wrapped inside a single parent element or a React Fragment (`<>...</>`)."
+    explanation: "Under the hood, JSX compiles down to a single function call, meaning a component can only return one root node unless wrapped in a parent or Fragment."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the conditional rendering snippet below. What is rendered when `items` is an empty array `[]`?
+      ```jsx
+      function ItemList({ items }) {
+        return (
+          <div>
+            {items.length && <p>You have items!</p>}
+          </div>
+        );
+      }
+      ```
+    options:
+      - "Nothing is rendered"
+      - "0 is rendered on the UI"
+      - "<p>You have items!</p>"
+      - "TypeError"
+    correctAnswer: "0 is rendered on the UI"
+    explanation: "In JavaScript logical `&&` evaluation, `0 && <p>` evaluates to `0` because `0` is falsy. React renders the number `0` directly to the DOM instead of ignoring it. (Correct idiom: `items.length > 0 && ...`)."
+    type: "QUIZ"
+
+  - questionText: "What is component composition in React?"
+    options:
+      - "Combining multiple independent components together (often via the `children` prop) to build complex UIs"
+      - "Inheriting classes from a base Component class using `extends`"
+      - "Merging multiple reducers into a single state store"
+      - "Bundling production scripts using Webpack"
+    correctAnswer: "Combining multiple independent components together (often via the `children` prop) to build complex UIs"
+    explanation: |
+      React favors component composition over inheritance for code reuse, combining components hierarchically via props like `children`.
+    type: "QUIZ"
+
+  - questionText: |
+      What will happen when a user clicks the button in this event handling example?
+      ```jsx
+      function ActionButton() {
+        const handleClick = (msg) => console.log(msg);
+        return <button onClick={handleClick('Clicked!')}>Click Me</button>;
+      }
+      ```
+    options:
+      - "It logs 'Clicked!' only when clicked."
+      - "It executes `handleClick('Clicked!')` immediately during component render time, not on click."
+      - "It throws a TypeScript compilation error."
+      - "It ignores the event handler entirely."
+    correctAnswer: "It executes `handleClick('Clicked!')` immediately during component render time, not on click."
+    explanation: "Passing `handleClick('Clicked!')` with parentheses invokes the function immediately on render. To pass arguments on click, it must be wrapped in an arrow function: `onClick={() => handleClick('Clicked!')}`."
+    type: "QUIZ"

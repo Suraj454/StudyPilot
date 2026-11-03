@@ -1,4 +1,3 @@
-
 id: 7
 title: "Debounce, Throttle and Function Patterns"
 description: "Understand techniques for controlling function execution and learn reusable function patterns used in JavaScript applications."
@@ -10,30 +9,108 @@ prerequisites:
 subtopics:
   - id: 1
     title: "Higher-Order Functions"
-
   - id: 2
     title: "Callback Functions"
-
   - id: 3
     title: "Debouncing"
-
   - id: 4
     title: "Implementing Debounce"
-
   - id: 5
     title: "Throttling"
-
   - id: 6
     title: "Implementing Throttle"
-
   - id: 7
     title: "Debounce vs Throttle"
-
   - id: 8
     title: "Currying"
-
   - id: 9
     title: "Function Composition"
-
   - id: 10
     title: "Practical Use Cases in Search Inputs and Event Handlers"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What is the primary difference between debouncing and throttling?"
+    options:
+      - "Debouncing delays execution until a certain amount of time has passed *without* new calls, whereas throttling ensures execution at regular intervals."
+      - "Throttling cancels all function calls permanently, whereas debouncing retries them automatically."
+      - "Debouncing is used exclusively for network requests, while throttling is only for CSS animations."
+      - "There is no difference; they are interchangeable terms."
+    correctAnswer: "Debouncing delays execution until a certain amount of time has passed *without* new calls, whereas throttling ensures execution at regular intervals."
+    explanation: "Debounce groups multiple rapid calls into a single call after typing stops, while throttle guarantees periodic execution (e.g., once every 300ms) during continuous events like scrolling."
+    type: "DIAGNOSTIC"
+
+  - questionText: "What is a Higher-Order Function (HOF) in JavaScript?"
+    options:
+      - "A function that runs in the highest memory stack of the browser"
+      - "A function that takes another function as an argument, returns a function, or both"
+      - "A function declared using the `async` keyword"
+      - "A class constructor method"
+    correctAnswer: "A function that takes another function as an argument, returns a function, or both"
+    explanation: "Higher-order functions (like `map`, `filter`, or custom wrappers like `debounce`) treat functions as first-class citizens."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      Consider a search input box attached to a `debounce` function with a 300ms delay. If a user types characters continuously every 100ms, when will the search API be invoked?
+      ```javascript
+      const handleSearch = debounce(fetchResults, 300);
+      ```
+    options:
+      - "Every 100ms as each character is typed"
+      - "Once, 300ms after the user *stops* typing completely"
+      - "Exactly after the first character is typed"
+      - "Only when the user presses the Enter key"
+    correctAnswer: "Once, 300ms after the user *stops* typing completely"
+    explanation: "Debouncing resets the timer on every keystroke, delaying execution until the specified quiescent period has elapsed."
+    type: "QUIZ"
+
+  - questionText: "Which use case is best suited for **throttling** rather than debouncing?"
+    options:
+      - "Real-time autocomplete search suggestions as a user types"
+      - "Saving form changes automatically after the user finishes editing"
+      - "Tracking window resize events or scroll position for infinite loading"
+      - "Submitting a payment form button to prevent double-clicks"
+    correctAnswer: "Tracking window resize events or scroll position for infinite loading"
+    explanation: "Scroll and resize events fire hundreds of times per second; throttling ensures handlers fire at a controlled rate (e.g., once every 100ms) rather than waiting until scrolling stops."
+    type: "QUIZ"
+
+  - questionText: |
+      What does the following curried function return when invoked as `add(2)(3)`?
+      ```javascript
+      const add = (a) => (b) => a + b;
+      ```
+    options:
+      - "5"
+      - "A function waiting for the next argument"
+      - "TypeError"
+      - "undefined"
+    correctAnswer: "5"
+    explanation: "Currying transforms a function with multiple arguments into a nested sequence of functions, each taking a single argument. `add(2)` returns a closure expecting `b`, which then returns `2 + 3 = 5`."
+    type: "QUIZ"
+
+  - questionText: "What is function currying primarily used for in JavaScript?"
+    options:
+      - "To convert asynchronous promises into synchronous blocking code"
+      - "To create specialized, reusable functions by partially applying arguments"
+      - "To optimize memory allocation for large arrays"
+      - "To automatically bind `this` to arrow functions"
+    correctAnswer: "To create specialized, reusable functions by partially applying arguments"
+    explanation: "Currying allows you to pre-fill configuration arguments and create specialized utility functions."
+    type: "QUIZ"
+
+  - questionText: |
+      What is the output of the following function composition utility evaluated with `compose(double, square)(3)`?
+      ```javascript
+      const square = x => x * x;
+      const double = x => x * 2;
+      const compose = (f, g) => x => f(g(x));
+      ```
+    options:
+      - "12"
+      - "18"
+      - "36"
+      - "6"
+    correctAnswer: "18"
+    explanation: "Composition executes from right to left: `square(3)` evaluates to `9`, then `double(9)` evaluates to `18`."
+    type: "QUIZ"

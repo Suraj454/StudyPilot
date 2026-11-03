@@ -1,4 +1,3 @@
-
 id: 13
 title: "Lists, Keys and Reconciliation"
 description: "Understand how React renders lists, why stable keys matter, and how reconciliation helps React update the user interface efficiently."
@@ -9,30 +8,106 @@ prerequisites:
 subtopics:
   - id: 1
     title: "Rendering Lists with map"
-
   - id: 2
     title: "Rendering Arrays of Components"
-
   - id: 3
     title: "Understanding the key Prop"
-
   - id: 4
     title: "Why Array Indexes Can Be Poor Keys"
-
   - id: 5
     title: "Choosing Stable and Unique Keys"
-
   - id: 6
     title: "Conditional Rendering of Lists"
-
   - id: 7
     title: "Understanding the Virtual DOM Concept"
-
   - id: 8
     title: "React Reconciliation Basics"
-
   - id: 9
     title: "How Keys Affect Component State"
-
   - id: 10
     title: "Common List Rendering Mistakes"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "Why does React require a unique `key` prop when rendering lists of elements?"
+    options:
+      - "To optimize CSS stylesheet compilation speeds"
+      - "To help React identify which items have changed, been added, or been removed during reconciliation"
+      - "To encrypt user data stored in list components"
+      - "To automatically sort items alphabetically"
+    correctAnswer: "To help React identify which items have changed, been added, or been removed during reconciliation"
+    explanation: "Keys give React a stable identity for list items, enabling efficient diffing and re-ordering without destroying unneeded DOM nodes."
+    type: "DIAGNOSTIC"
+
+  - questionText: "What is the Virtual DOM in React?"
+    options:
+      - "A direct reference to the browser's native window document object"
+      - "A lightweight in-memory representation of the real DOM used for efficient diffing before updating the UI"
+      - "An external database backend for storing user sessions"
+      - "A compiled WebAssembly binary running on a background thread"
+    correctAnswer: "A lightweight in-memory representation of the real DOM used for efficient diffing before updating the UI"
+    explanation: "React computes changes on its lightweight Virtual DOM first, calculating the minimal set of real DOM mutations needed during reconciliation."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What can go wrong if you use array indices (`index`) as keys for a dynamic list that supports re-ordering or item deletion?
+      ```jsx
+      {items.map((item, index) => <ListItem data="{item}" key="{index}"/>)}
+      ```
+    options:
+      - "It causes state corruption and incorrect UI updates because item identities get mismatched with re-ordered indices."
+      - "It throws an immediate compilation error."
+      - "It prevents the list from rendering altogether."
+      - "It doubles the memory consumption of the browser tab."
+    correctAnswer: "It causes state corruption and incorrect UI updates because item identities get mismatched with re-ordered indices."
+    explanation: "If indices are used as keys, deleting or re-ordering items causes React to mistake updated items for old ones based on position, leading to broken component states."
+    type: "QUIZ"
+
+  - questionText: "How does React's reconciliation diffing algorithm treat elements of different component types at the same position in the tree?"
+    options:
+      - "It updates the existing DOM nodes in place."
+      - "It destroys the old tree entirely and builds a brand-new DOM subtree from scratch."
+      - "It merges their state properties together."
+      - "It throws a React hydration error."
+    correctAnswer: "It destroys the old tree entirely and builds a brand-new DOM subtree from scratch."
+    explanation: "When component types change at a node position, React considers the old tree invalid, unmounts it completely, and constructs a fresh subtree."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the component list below. What happens to child component state when its key changes from `id-1` to `id-99`?
+      ```jsx
+      <UserCard id="{userId}" key="{userId}"/>
+      ```
+    options:
+      - "The component state is preserved across the key change."
+      - "The old component instance is unmounted, its state is destroyed, and a new instance is mounted with fresh state."
+      - "It triggers an asynchronous error."
+      - "The key change is ignored by React."
+    correctAnswer: "The old component instance is unmounted, its state is destroyed, and a new instance is mounted with fresh state."
+    explanation: "Keys act as an instruction for React's identity check. Changing a key forces React to treat it as an entirely different component instance, resetting its state."
+    type: "QUIZ"
+
+  - questionText: "What makes a good candidate for a list item `key`?"
+    options:
+      - "Random numbers generated on every render (`Math.random()`)"
+      - "The sequential index of the array (`0, 1, 2...`)"
+      - "A unique, stable identifier from your data (such as a database `id` or UUID)"
+      - "The text content of the item string converted to uppercase"
+    correctAnswer: "A unique, stable identifier from your data (such as a database `id` or UUID)"
+    explanation: "Keys must be unique among siblings and **stable** (should not change across renders or re-orderings), making unique database IDs ideal."
+    type: "QUIZ"
+
+  - questionText: |
+      What will happen if duplicate keys exist among sibling elements in a rendered list?
+      ```jsx
+      // Rendering items with duplicate keys ['a', 'a']
+      ```
+    options:
+      - "React will merge them into a single element."
+      - "React will log a warning in development, and rendering behavior or state preservation may become unpredictable."
+      - "The application will immediately crash with a fatal exception."
+      - "TypeScript will prevent code compilation."
+    correctAnswer: "React will log a warning in development, and rendering behavior or state preservation may become unpredictable."
+    explanation: "React relies on key uniqueness to map components correctly. Duplicate keys cause reconciliation confusion and console warnings."
+    type: "QUIZ"

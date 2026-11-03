@@ -6,7 +6,7 @@
 JavaScript and React technical interview preparation, for intermediate IT developers.
 
 ### 1.2 Topics
-V1 has 12 topics. Each topic has one LEARN task (its study time) and one QUIZ task (10 minutes). No LEARN task is longer than 60 minutes.
+V1 has 15 topics. Each topic has one LEARN task (its study time) and one QUIZ task (10 minutes). No LEARN task is longer than 60 minutes.
 
 | # | Topic                                                 | What it covers                                            | Needs first |
 |---|---                                                    |---|---|
@@ -38,7 +38,7 @@ The diagnostic measures what the user already knows before a plan is generated. 
 
 ### 2.2 Question rules
 - Multiple choice, one correct answer, each question linked to one topic.
-- 2 questions per topic, so 24 questions in total. Every user gets the same set in the same order.
+- 2 questions per topic, so 30 questions in total. Every user gets the same set in the same order.
 - Questions come from a prepared, reviewed bank. Each answer key is checked by the developer. AI-generated questions are not used.
 - The correct answer and explanation are never sent to the frontend while the attempt is in progress.
 

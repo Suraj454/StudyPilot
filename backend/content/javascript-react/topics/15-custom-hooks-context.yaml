@@ -1,4 +1,3 @@
-
 id: 15
 title: "Custom Hooks and Context"
 description: "Learn how to extract reusable component logic into custom hooks and share data across components using React Context."
@@ -9,33 +8,123 @@ prerequisites:
 subtopics:
   - id: 1
     title: "What Are Custom Hooks?"
-
   - id: 2
     title: "Rules of Hooks"
-
   - id: 3
     title: "Creating Your First Custom Hook"
-
   - id: 4
     title: "Sharing Logic Between Components"
-
   - id: 5
     title: "Understanding the Context API"
-
   - id: 6
     title: "Creating a Context"
-
   - id: 7
     title: "Using Context with useContext"
-
   - id: 8
     title: "Understanding Prop Drilling"
-
   - id: 9
     title: "Custom Hooks vs Context"
-
   - id: 10
     title: "Practical Examples: Authentication and Theme"
-
   - id: 11
     title: "Common Mistakes and Best Practices"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What problem does React Context solve in component tree architectures?"
+    options:
+      - "It optimizes local component CSS module rendering."
+      - "It avoids 'prop drilling' by allowing data to be shared directly with deep components without manually passing props through every intermediate level."
+      - "It replaces PostgreSQL database queries with client-side caching."
+      - "It automatically memoizes heavy calculations using web workers."
+    correctAnswer: "It avoids 'prop drilling' by allowing data to be shared directly with deep components without manually passing props through every intermediate level."
+    explanation: "Context provides a way to pass data down the component tree without manually passing props down level-by-level through components that do not need them."
+    type: "DIAGNOSTIC"
+
+  - questionText: "What is the mandatory naming convention required for custom React hooks?"
+    options:
+      - "The function name must end with `Hook` (e.g., `fetchUserHook`)."
+      - "The function name must start with the prefix `use` (e.g., `useFetchUser`)."
+      - "The function name must start with an uppercase letter like a component."
+      - "Custom hooks must be exported as default arrow functions."
+    correctAnswer: "The function name must start with the prefix `use` (e.g., `useFetchUser`)."
+    explanation: "React relies on the `use` prefix to automatically inspect and enforce the Rules of Hooks via linters and compiler static checks."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What will happen when two separate components invoke the exact same custom hook `useCounter()`?
+      ```jsx
+      function ComponentA() { const { count } = useCounter(); return <div>{count}</div>; }
+      function ComponentB() { const { count } = useCounter(); return <div>{count}</div>; }
+      ```
+    options:
+      - "They share the exact same state instance automatically."
+      - "Each component invocation creates a completely isolated, independent copy of state and side effects."
+      - "It throws a duplicate hook execution error."
+      - "The second invocation overwrites the first component's state."
+    correctAnswer: "Each component invocation creates a completely isolated, independent copy of state and side effects."
+    explanation: "Custom hooks share stateful **logic**, not state itself. Every call to a custom hook gets its own completely isolated state container."
+    type: "QUIZ"
+
+  - questionText: "Which of the following violates the foundational Rules of Hooks in React?"
+    options:
+      - "Calling `useState` inside a custom hook starting with `use`."
+      - "Calling `useEffect` inside a conditional `if` statement or loop."
+      - "Calling `useContext` at the top level of a function component."
+      - "Extracting `useCallback` into an external helper hook file."
+    correctAnswer: "Calling `useEffect` inside a conditional `if` statement or loop."
+    explanation: "Hooks must always be called at the top level of React functions, before any early returns, conditionals, or loops, to guarantee identical call order on every render."
+    type: "QUIZ"
+
+  - questionText: |
+      What happens to consuming components when the value provided by a `<ThemeContext.Provider value={theme}>` updates?
+      ```jsx
+      const theme = 'dark';
+      return (
+        <ThemeContext.Provider value="{theme}">
+          <ChildComponent/>
+        </ThemeContext.Provider>
+      );
+      ```
+    options:
+      - "Only components that call `useContext(ThemeContext)` will re-render when `theme` changes."
+      - "Every child component in the entire React tree re-renders, regardless of whether it consumes the context."
+      - "The browser executes a full page reload."
+      - "Context values cannot be updated dynamically once initialized."
+    correctAnswer: "Only components that call `useContext(ThemeContext)` will re-render when `theme` changes."
+    explanation: |
+      React automatically re-renders all subscribers (components invoking `useContext` for that specific context) whenever the provider's `value` prop changes.
+    type: "QUIZ"
+
+  - questionText: "When should you prefer using a Custom Hook over React Context?"
+    options:
+      - "When you need to broadcast global user authentication state across the entire app."
+      - "When you want to encapsulate and reuse stateful logic or side effects (like data fetching or window resizing) across independent components."
+      - "When you want to replace Redux with a global state store."
+      - "When you need to pass props down through 10 layers of components."
+    correctAnswer: "When you want to encapsulate and reuse stateful logic or side effects (like data fetching or window resizing) across independent components."
+    explanation: "Custom hooks are designed for logic reuse, whereas Context is designed for sharing data deeply down the component tree without prop drilling."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the following custom hook. Why might `useLocalStorage` cause bugs if not written carefully?
+      ```jsx
+      function useLocalStorage(key, initialValue) {
+        const [value, setValue] = useState(() => {
+          return localStorage.getItem(key) ?? initialValue;
+        });
+        useEffect(() => {
+          localStorage.setItem(key, value);
+        }, [key, value]);
+        return [value, setValue];
+      }
+      ```
+    options:
+      - "Custom hooks cannot use `useState` inside them."
+      - "Synchronizing synchronous browser APIs like `localStorage` directly inside `useEffect` on every render cycle can lead to performance overhead or infinite sync loops if unoptimized."
+      - "Local storage values are automatically deleted by React on component unmount."
+      - "Effect hooks cannot accept dependencies like `key` or `value`."
+    correctAnswer: "Synchronizing synchronous browser APIs like `localStorage` directly inside `useEffect` on every render cycle can lead to performance overhead or infinite sync loops if unoptimized."
+    explanation: "While functional, handling external storage sync requires careful dependency management to prevent unnecessary writes or cross-tab desynchronization."
+    type: "QUIZ"

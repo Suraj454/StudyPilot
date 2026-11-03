@@ -35,9 +35,28 @@ export default function LoginPage() {
         method: 'POST',
         body: JSON.stringify(body),
       }),
-    onSuccess: (res) => {
-      setToken(res.data.token);
-      navigate('/');
+    onSuccess: async (res) => {
+      const token = res.data.token;
+      setToken(token);
+
+      try {
+        // Check if the user already has an active goal
+        const goalsRes = await fetch('http://localhost:4000/api/goals', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const goalData = await goalsRes.json();
+
+        if (goalsRes.ok && goalData.goals && goalData.goals.length > 0) {
+          // Old user with an active goal -> Go to Dashboard
+          navigate('/dashboard');
+        } else {
+          // New user with no goals -> Go to Goal Setup Wizard
+          navigate('/goals/new');
+        }
+      } catch (err) {
+        // Fallback if the check fails
+        navigate('/goals/new');
+      }
     },
   });
 
@@ -82,7 +101,7 @@ export default function LoginPage() {
         : undefined;
 
   return (
-<AuthLayout
+    <AuthLayout
       title="Welcome back"
       subtitle="Pick up where you left off"
       panelHeadline="Pick up right where your engineering growth paused"

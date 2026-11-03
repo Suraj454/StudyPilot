@@ -1,4 +1,3 @@
-
 id: 2
 title: "this, call, apply and bind"
 description: "Understand how the this keyword works in different contexts and how to explicitly control its value."
@@ -9,24 +8,124 @@ prerequisites:
 subtopics:
   - id: 1
     title: "Understanding the this Keyword"
-
   - id: 2
     title: "this in Global and Function Contexts"
-
   - id: 3
     title: "this in Object Methods"
-
   - id: 4
     title: "this in Arrow Functions"
-
   - id: 5
     title: "The call Method"
-
   - id: 6
     title: "The apply Method"
-
   - id: 7
     title: "The bind Method"
-
   - id: 8
     title: "Practical Use Cases"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What does the `this` keyword typically refer to inside a standard object method in JavaScript?"
+    options:
+      - "The global window object"
+      - "The object that is calling the method"
+      - "The function's prototype chain parent"
+      - "The DOM document root"
+    correctAnswer: "The object that is calling the method"
+    explanation: "In a standard function invoked as a method of an object, `this` points to the object owner of the method."
+    type: "DIAGNOSTIC"
+
+  - questionText: "How do arrow functions handle the `this` keyword compared to regular functions?"
+    options:
+      - "Arrow functions have their own dynamically bound `this`."
+      - "Arrow functions inherit `this` lexically from their enclosing execution scope."
+      - "Arrow functions always set `this` to undefined strictly."
+      - "Arrow functions allow `this` to be reassigned manually."
+    correctAnswer: "Arrow functions inherit `this` lexically from their enclosing execution scope."
+    explanation: "Arrow functions do not create their own execution context; instead, they capture the `this` value of the enclosing lexical scope."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What will be the output of the following code snippet?
+      ```javascript
+      const obj = {
+        name: 'StudyPilot',
+        regularFunc: function() {
+          console.log(this.name);
+        },
+        arrowFunc: () => {
+          console.log(this.name);
+        }
+      };
+      obj.regularFunc();
+      obj.arrowFunc();
+      ```
+    options:
+      - "StudyPilot, StudyPilot"
+      - "StudyPilot, undefined (or global name)"
+      - "undefined, StudyPilot"
+      - "TypeError"
+    correctAnswer: "StudyPilot, undefined (or global name)"
+    explanation: "Regular functions bind `this` to the calling object (`obj`), while arrow functions resolve `this` lexically from the outer scope where `obj` is defined."
+    type: "QUIZ"
+
+  - questionText: "What is the primary difference between the `call()` and `apply()` methods when invoking a function?"
+    options:
+      - "`call()` passes arguments individually separated by commas, while `apply()` takes arguments as an array."
+      - "`apply()` returns a bound function copy, while `call()` executes immediately."
+      - "`call()` can only be used with arrow functions."
+      - "There is no difference between them."
+    correctAnswer: "`call()` passes arguments individually separated by commas, while `apply()` takes arguments as an array."
+    explanation: "Both execute functions immediately with a specified `this` context, but `call` takes comma-separated arguments and `apply` takes an array of arguments."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the code snippet below. What does `boundGreet()` log?
+      ```javascript
+      const user = { name: 'Alice' };
+      function greet() {
+        console.log(`Hello, ${this.name}`);
+      }
+      const boundGreet = greet.bind(user);
+      boundGreet();
+      ```
+    options:
+      - "Hello, undefined"
+      - "Hello, Alice"
+      - "TypeError"
+      - "Hello, global"
+    correctAnswer: "Hello, Alice"
+    explanation: "The `.bind()` method creates a new permanent bound function whose `this` context is permanently set to the provided `user` object."
+    type: "QUIZ"
+
+  - questionText: "Can the `this` value of an arrow function be modified using `.call()`, `.apply()`, or `.bind()`?"
+    options:
+      - "Yes, always."
+      - "No, arrow function `this` binding is lexical and immutable via explicit binding methods."
+      - "Only if strict mode is enabled."
+      - "Only using the `apply` method."
+    correctAnswer: "No, arrow function `this` binding is lexical and immutable via explicit binding methods."
+    explanation: "Explicit binding methods like `call`, `apply`, and `bind` have no effect on arrow functions because their `this` is lexically bound."
+    type: "QUIZ"
+
+  - questionText: |
+      What will be the output of executing the following snippet?
+      ```javascript
+      const calculator = {
+        num: 10,
+        double() {
+          return this.num * 2;
+        }
+      };
+      const borrowDouble = calculator.double;
+      console.log(borrowDouble());
+      ```
+    options:
+      - "20"
+      - "NaN or TypeError (depending on strict mode)"
+      - "0"
+      - "10"
+    correctAnswer: "NaN or TypeError (depending on strict mode)"
+    explanation: "When `borrowDouble` is detached from the `calculator` object and invoked standalone, `this` defaults to `undefined` (in strict mode) or the global object, losing the reference to `calculator.num`."
+    type: "QUIZ"

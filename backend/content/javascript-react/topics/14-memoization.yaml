@@ -1,4 +1,3 @@
-
 id: 14
 title: "Memoization"
 description: "Understand React memoization techniques and how to optimize rendering and expensive calculations without adding unnecessary complexity."
@@ -10,30 +9,114 @@ prerequisites:
 subtopics:
   - id: 1
     title: "What Is Memoization?"
-
   - id: 2
     title: "Understanding Referential Equality"
-
   - id: 3
     title: "Understanding React.memo"
-
   - id: 4
     title: "Understanding useMemo"
-
   - id: 5
     title: "Understanding useCallback"
-
   - id: 6
     title: "Memoizing Components vs Values vs Functions"
-
   - id: 7
     title: "Common Causes of Unnecessary Re-renders"
-
   - id: 8
     title: "When Memoization Is Useful"
-
   - id: 9
     title: "When Not to Use Memoization"
-
   - id: 10
     title: "Measuring Performance Before Optimizing"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What is the core purpose of memoization in React applications?"
+    options:
+      - "To permanently store application state in local browser storage"
+      - "To cache the results of expensive computations or prevent unnecessary component re-renders by remembering previous inputs and outputs"
+      - "To automatically fix network fetching CORS errors"
+      - "To convert class components into function components"
+    correctAnswer: "To cache the results of expensive computations or prevent unnecessary component re-renders by remembering previous inputs and outputs"
+    explanation: "Memoization caches calculation results or component renderings so they can be reused when inputs haven't changed, optimizing CPU performance."
+    type: "DIAGNOSTIC"
+
+  - questionText: "What is referential equality in JavaScript, and why is it important for React hooks like `useMemo` or `useCallback`?"
+    options:
+      - "It compares whether two objects or functions point to the exact same location in memory (`===`), which determines whether dependency checks trigger re-computations."
+      - "It checks whether two strings contain the same alphabetical characters regardless of case."
+      - "It ensures database rows have unique primary keys."
+      - "It verifies whether two DOM nodes have matching CSS class names."
+    correctAnswer: "It compares whether two objects or functions point to the exact same location in memory (`===`), which determines whether dependency checks trigger re-computations."
+    explanation: "Because objects and functions are reference types, newly created literals on every render have different memory addresses. Memoization hooks cache references to maintain stability."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) -->
+  - questionText: |
+      What will happen if you pass an inline arrow function as a prop to a component wrapped in `React.memo` without using `useCallback`?
+      ```jsx
+      const MemoizedChild = React.memo(({ onClick }) => <button onClick={onClick}>Click</button>);
+
+      function Parent() {
+        const [count, setCount] = useState(0);
+        return <MemoizedChild onClick="{()"> console.log('Clicked')} />;
+      }
+      ```
+    options:
+      - "`MemoizedChild` will skip re-rendering successfully."
+      - "`MemoizedChild` will still re-render on every parent click because the inline arrow function creates a new reference on every render."
+      - "It triggers a compilation error."
+      - "It throws a React hydration exception."
+    correctAnswer: "`MemoizedChild` will still re-render on every parent click because the inline arrow function creates a new reference on every render."
+    explanation: "`React.memo` performs a shallow prop comparison. Since an inline arrow function creates a brand-new function reference on every parent render, the prop equality check fails, defeating the memoization."
+    type: "QUIZ"
+
+  - questionText: "When should you *not* use memoization (`useMemo` or `useCallback`)?"
+    options:
+      - "For very cheap calculations or simple primitive values where the overhead of cache management and dependency comparison outweighs the compute savings."
+      - "When passing callback functions to child components."
+      - "When performing heavy mathematical data filtering on large arrays."
+      - "When preventing infinite loops in `useEffect` dependencies."
+    correctAnswer: "For very cheap calculations or simple primitive values where the overhead of cache management and dependency comparison outweighs the compute savings."
+    explanation: "Memoization isn't free—it consumes memory and adds execution overhead for dependency checks. Premature memoization on trivial code can actually slow down your app."
+    type: "QUIZ"
+
+  - questionText: |
+      What is the primary difference between `useMemo` and `useCallback`?
+      ```jsx
+      const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+      const memoizedCallback = useCallback(() => doSomething(a, b), [a, b]);
+      ```
+    options:
+      - "`useMemo` caches the calculated *result* of a function, whereas `useCallback` caches the *function instance itself*."
+      - "`useMemo` is used exclusively for class components, while `useCallback` is for function components."
+      - "`useCallback` runs synchronously during rendering, while `useMemo` runs asynchronously."
+      - "There is no difference; `useCallback` is just an alias for `useMemo`."
+    correctAnswer: "`useMemo` caches the calculated *result* of a function, whereas `useCallback` caches the *function instance itself*."
+    explanation: "`useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`, specifically designed to maintain stable function references across renders."
+    type: "QUIZ"
+
+  - questionText: "How does `React.memo` decide whether a wrapped component should re-render?"
+    options:
+      - "It compares current props with previous props using shallow equality (`Object.is` or shallow comparison on each prop)."
+      - "It performs a deep recursive comparison of all nested object properties."
+      - "It checks the browser's network latency."
+      - "It re-renders whenever any component anywhere in the application updates."
+    correctAnswer: "It compares current props with previous props using shallow equality (`Object.is` or shallow comparison on each prop)."
+    explanation: "`React.memo` wraps your component and shallowly compares its incoming props, skipping re-renders if all prop references remain equal."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the `useMemo` hook below. When will `expensiveResult` be re-computed?
+      ```jsx
+      const expensiveResult = useMemo(() => {
+        return heavyCalculation(data);
+      }, [data.id]);
+      ```
+    options:
+      - "On every single render of the component."
+      - "Only when `data.id` changes between renders."
+      - "Only when the browser window is resized."
+      - "Never, because `useMemo` runs only once on mount."
+    correctAnswer: "Only when `data.id` changes between renders."
+    explanation: "The dependency array `[data.id]` tells React to reuse the cached calculation result unless `data.id` changes."
+    type: "QUIZ"

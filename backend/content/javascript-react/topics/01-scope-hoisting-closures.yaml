@@ -1,4 +1,3 @@
-
 id: 1
 title: "Scope, Hoisting and Closures"
 description: "Understand JavaScript scope, hoisting, and closures, including their practical use cases."
@@ -8,21 +7,107 @@ prerequisites: []
 subtopics:
   - id: 1
     title: "var, let and const"
-
   - id: 2
     title: "Global, Function and Block Scope"
-
   - id: 3
     title: "Lexical Scope and Scope Chain"
-
   - id: 4
     title: "Hoisting"
-
   - id: 5
     title: "Temporal Dead Zone"
-
   - id: 6
     title: "Closures"
-
   - id: 7
     title: "Practical Closure Use Cases"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "Which mechanism describes JavaScript moving variable and function declarations to the top of their scope before code execution?"
+    options:
+      - "Cloning"
+      - "Hoisting"
+      - "Bundling"
+      - "Minification"
+    correctAnswer: "Hoisting"
+    explanation: "Hoisting is JavaScript's default behavior of moving declarations to the top of their compilation scope."
+    type: "DIAGNOSTIC"
+
+  - questionText: "What is lexical scope in JavaScript?"
+    options:
+      - "Scope determined by where a function is called at runtime"
+      - "Scope determined by where variables are defined lexically in the source code structure"
+      - "Global scope shared across all imported modules automatically"
+      - "Scope that only applies to asynchronous promises"
+    correctAnswer: "Scope determined by where variables are defined lexically in the source code structure"
+    explanation: "Lexical scope means that a function's scope is determined by its physical placement in the source code."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What will be the output of the following closure and loop code snippet?
+      ```javascript
+      for (var i = 1; i <= 3; i++) {
+        setTimeout(() => console.log(i), 1000);
+      }
+      ```
+    options:
+      - "1, 2, 3"
+      - "3, 3, 3"
+      - "ReferenceError"
+      - "undefined"
+    correctAnswer: "3, 3, 3"
+    explanation: "Because `var` is function-scoped rather than block-scoped, a single variable `i` is shared across iterations, resulting in 3 being logged three times."
+    type: "QUIZ"
+
+  - questionText: "What happens when you try to access a `let` or `const` variable before its declaration in code?"
+    options:
+      - "It returns undefined"
+      - "It returns null"
+      - "It throws a ReferenceError due to the Temporal Dead Zone (TDZ)"
+      - "It silently skips the statement"
+    correctAnswer: "It throws a ReferenceError due to the Temporal Dead Zone (TDZ)"
+    explanation: "Variables declared with `let` and `const` are hoisted but remain uninitialized in the Temporal Dead Zone until their line of definition is reached."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the following code snippet. What will be logged?
+      ```javascript
+      function createCounter() {
+        let count = 0;
+        return function() {
+          count++;
+          return count;
+        };
+      }
+      const counter = createCounter();
+      console.log(counter());
+      console.log(counter());
+      ```
+    options:
+      - "1, 1"
+      - "1, 2"
+      - "0, 1"
+      - "ReferenceError"
+    correctAnswer: "1, 2"
+    explanation: "The inner function retains a closure over the outer `count` variable, preserving and mutating its state across multiple invocations."
+    type: "QUIZ"
+
+  - questionText: "Which variable declaration keyword introduces block-scoping instead of function-scoping?"
+    options:
+      - "var"
+      - "let"
+      - "function"
+      - "global"
+    correctAnswer: "let"
+    explanation: "`let` and `const` are block-scoped, meaning they are confined to the nearest enclosing curly braces (`{}`)."
+    type: "QUIZ"
+
+  - questionText: "What is a primary practical use case for closures in software development?"
+    options:
+      - "Creating private state or data encapsulation"
+      - "Speeding up array iteration performance"
+      - "Automatically handling CSS layout reflows"
+      - "Preventing all runtime syntax errors"
+    correctAnswer: "Creating private state or data encapsulation"
+    explanation: "Closures allow developers to emulate private variables and methods, exposing only privileged accessors."
+    type: "QUIZ"

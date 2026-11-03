@@ -1,4 +1,3 @@
-
 id: 5
 title: "Call Stack and Event Loop"
 description: "Understand how JavaScript executes code, manages function calls, and handles asynchronous operations using the event loop and task queues."
@@ -9,27 +8,116 @@ prerequisites:
 subtopics:
   - id: 1
     title: "How JavaScript Executes Code"
-
   - id: 2
     title: "Execution Context"
-
   - id: 3
     title: "The Call Stack"
-
   - id: 4
     title: "Synchronous vs Asynchronous Code"
-
   - id: 5
     title: "Browser APIs and the Runtime Environment"
-
   - id: 6
     title: "The Event Loop"
-
   - id: 7
     title: "Task Queue and Microtask Queue"
-
   - id: 8
     title: "Execution Order with setTimeout and Promises"
-
   - id: 9
     title: "Practical Execution Order Examples"
+
+questions:
+  # --- DIAGNOSTIC QUESTIONS (2 Total) ---
+  - questionText: "What is the primary role of the Call Stack in JavaScript's execution engine?"
+    options:
+      - "To manage asynchronous network requests and fetch responses"
+      - "To keep track of function execution contexts and determine where the program is in its execution"
+      - "To store styling sheets and render DOM nodes"
+      - "To handle garbage collection for unreferenced objects"
+    correctAnswer: "To keep track of function execution contexts and determine where the program is in its execution"
+    explanation: "The call stack is a LIFO (Last In, First Out) data structure that records where in the program we currently are by stacking function calls."
+    type: "DIAGNOSTIC"
+
+  - questionText: "Which queue has higher priority in JavaScript's event loop processing: the Task Queue (Macrotask) or the Microtask Queue?"
+    options:
+      - "Task Queue"
+      - "Microtask Queue"
+      - "They share equal priority and run concurrently"
+      - "Priority depends on the browser's operating system"
+    correctAnswer: "Microtask Queue"
+    explanation: "The event loop always completely empties the Microtask Queue (containing Promises and `queueMicrotask`) before moving on to any tasks in the Macrotask Queue."
+    type: "DIAGNOSTIC"
+
+  # --- QUIZ QUESTIONS (5 Total) ---
+  - questionText: |
+      What will be the exact order of console logs when the following code runs?
+      ```javascript
+      console.log('1');
+      setTimeout(() => console.log('2'), 0);
+      Promise.resolve().then(() => console.log('3'));
+      console.log('4');
+      ```
+    options:
+      - "1, 2, 3, 4"
+      - "1, 4, 3, 2"
+      - "1, 4, 2, 3"
+      - "3, 2, 1, 4"
+    correctAnswer: "1, 4, 3, 2"
+    explanation: "Synchronous code runs first ('1', '4'). Next, microtasks (Promise '3') are executed before any macrotasks (`setTimeout` '2')."
+    type: "QUIZ"
+
+  - questionText: "What causes a 'RangeError: Maximum call stack size exceeded' (Stack Overflow) error?"
+    options:
+      - "An infinite recursive function call without a proper base case"
+      - "A Promise that resolves with too many arguments"
+      - "Running out of storage space in `localStorage`"
+      - "Exceeding the maximum number of items in a `setTimeout` callback queue"
+    correctAnswer: "An infinite recursive function call without a proper base case"
+    explanation: "If functions keep calling each other or themselves without returning, the call stack exceeds its fixed memory allocation."
+    type: "QUIZ"
+
+  - questionText: |
+      Consider the asynchronous code below. In what order will the outputs appear?
+      ```javascript
+      setTimeout(() => console.log('A'), 0);
+      Promise.resolve().then(() => console.log('B'));
+      setTimeout(() => console.log('C'), 0);
+      console.log('D');
+      ```
+    options:
+      - "A, B, C, D"
+      - "D, B, A, C"
+      - "D, A, B, C"
+      - "B, D, A, C"
+    correctAnswer: "D, B, A, C"
+    explanation: "Synchronous 'D' logs first. Then the promise microtask 'B' runs. Finally, the macrotasks 'A' and 'C' run in FIFO order."
+    type: "QUIZ"
+
+  - questionText: "Where do asynchronous Web APIs like `setTimeout` or `fetch` place their callback functions when their wait or network operation finishes?"
+    options:
+      - "Directly onto the Call Stack"
+      - "Into the Task Queue or Microtask Queue"
+      - "Into the Local Storage cache"
+      - "Into the React Virtual DOM buffer"
+    correctAnswer: "Into the Task Queue or Microtask Queue"
+    explanation: "Web APIs handle async operations in the background and push their callbacks into the respective queues once completed, waiting for the event loop to transfer them to the call stack."
+    type: "QUIZ"
+
+  - questionText: |
+      What will be the output sequence of the following nested asynchronous snippet?
+      ```javascript
+      console.log('Start');
+      setTimeout(() => {
+        console.log('Timeout');
+        Promise.resolve().then(() => console.log('Promise inside Timeout'));
+      }, 0);
+      Promise.resolve().then(() => console.log('Promise 1'));
+      console.log('End');
+      ```
+    options:
+      - "Start, End, Timeout, Promise inside Timeout, Promise 1"
+      - "Start, End, Promise 1, Timeout, Promise inside Timeout"
+      - "Start, Timeout, Promise 1, End, Promise inside Timeout"
+      - "Start, End, Promise 1, Promise inside Timeout, Timeout"
+    correctAnswer: "Start, End, Promise 1, Timeout, Promise inside Timeout"
+    explanation: "1. 'Start' and 'End' log synchronously. 2. 'Promise 1' logs from the initial microtask queue. 3. The event loop picks the `setTimeout` macrotask, logging 'Timeout', which immediately queues a new microtask that logs 'Promise inside Timeout'."
+    type: "QUIZ"
