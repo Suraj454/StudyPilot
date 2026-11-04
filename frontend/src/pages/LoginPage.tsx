@@ -20,6 +20,11 @@ type LoginResponse = {
   };
 };
 
+type GoalsResponse = {
+  message: string;
+  goals: unknown[];
+};
+
 export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -41,12 +46,9 @@ export default function LoginPage() {
 
       try {
         // Check if the user already has an active goal
-        const goalsRes = await fetch('http://localhost:4000/api/goals', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const goalData = await goalsRes.json();
+        const goalsRes = await apiFetch<GoalsResponse>('/api/goals');
 
-        if (goalsRes.ok && goalData.goals && goalData.goals.length > 0) {
+        if (goalsRes.goals && goalsRes.goals.length > 0) {
           // Old user with an active goal -> Go to Dashboard
           navigate('/dashboard');
         } else {
