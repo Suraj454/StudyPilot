@@ -34,21 +34,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What is the primary purpose of the `useEffect` hook in React?"
     options:
-      - "To perform state updates synchronously during the render phase"
-      - "To synchronize a component with an external system or side effect (such as data fetching, subscriptions, or DOM manipulation)"
-      - "To replace JavaScript's built-in array methods like map and filter"
-      - "To manage application-wide global theme styling"
-    correctAnswer: "To synchronize a component with an external system or side effect (such as data fetching, subscriptions, or DOM manipulation)"
+      - id: 1
+        text: "To perform state updates synchronously during the render phase"
+      - id: 2
+        text: "To synchronize a component with an external system or side effect (such as data fetching, subscriptions, or DOM manipulation)"
+      - id: 3
+        text: "To replace JavaScript's built-in array methods like map and filter"
+      - id: 4
+        text: "To manage application-wide global theme styling"
+    correctOptionId: 2
     explanation: "`useEffect` lets you execute code after rendering to synchronize your component with systems outside of React's pure rendering lifecycle."
     type: "DIAGNOSTIC"
 
   - questionText: "What happens when you omit the dependency array entirely from a `useEffect` call?"
     options:
-      - "The effect runs only once when the component mounts."
-      - "The effect runs after every single render of the component."
-      - "React throws a compilation error."
-      - "The effect never runs at all."
-    correctAnswer: "The effect runs after every single render of the component."
+      - id: 1
+        text: "The effect runs only once when the component mounts."
+      - id: 2
+        text: "The effect runs after every single render of the component."
+      - id: 3
+        text: "React throws a compilation error."
+      - id: 4
+        text: "The effect never runs at all."
+    correctOptionId: 2
     explanation: "Without a dependency array, React cannot skip execution, causing the effect function to run after initial mount and after every subsequent re-render."
     type: "DIAGNOSTIC"
 
@@ -62,11 +70,15 @@ questions:
       }, []);
       ```
     options:
-      - "To clear subscriptions, timers, or event listeners when the component unmounts or before the effect runs again."
-      - "To force an immediate re-render of the parent component."
-      - "To reset state variables back to their initial default values."
-      - "To catch asynchronous syntax errors."
-    correctAnswer: "To clear subscriptions, timers, or event listeners when the component unmounts or before the effect runs again."
+      - id: 1
+        text: "To clear subscriptions, timers, or event listeners when the component unmounts or before the effect runs again."
+      - id: 2
+        text: "To force an immediate re-render of the parent component."
+      - id: 3
+        text: "To reset state variables back to their initial default values."
+      - id: 4
+        text: "To catch asynchronous syntax errors."
+    correctOptionId: 1
     explanation: "Cleanup functions prevent memory leaks and stale subscription bugs by cleaning up side effects when a component unmounts or dependencies change."
     type: "QUIZ"
 
@@ -80,21 +92,29 @@ questions:
       }, []);
       ```
     options:
-      - "It causes an infinite loop because `setUser` is called inside the effect."
-      - "It misses `userId` in the dependency array, causing the UI to show stale data if `userId` prop changes."
-      - "It violates CSS rendering rules."
-      - "It throws a syntax error on fetch."
-    correctAnswer: "It misses `userId` in the dependency array, causing the UI to show stale data if `userId` prop changes."
+      - id: 1
+        text: "It causes an infinite loop because `setUser` is called inside the effect."
+      - id: 2
+        text: "It misses `userId` in the dependency array, causing the UI to show stale data if `userId` prop changes."
+      - id: 3
+        text: "It violates CSS rendering rules."
+      - id: 4
+        text: "It throws a syntax error on fetch."
+    correctOptionId: 2
     explanation: "Any reactive values (like props or state) used inside an effect must be included in the dependency array so the effect re-runs when they change."
     type: "QUIZ"
 
   - questionText: "Why do effects run twice on mount in React Strict Mode during development?"
     options:
-      - "To test whether component effects are resilient to being unmounted and re-mounted (checking cleanup implementation)."
-      - "To double database write performance."
-      - "To automatically fix infinite loop bugs in user code."
-      - "Because of a known memory leak in the browser engine."
-    correctAnswer: "To test whether component effects are resilient to being unmounted and re-mounted (checking cleanup implementation)."
+      - id: 1
+        text: "To test whether component effects are resilient to being unmounted and re-mounted (checking cleanup implementation)."
+      - id: 2
+        text: "To double database write performance."
+      - id: 3
+        text: "To automatically fix infinite loop bugs in user code."
+      - id: 4
+        text: "Because of a known memory leak in the browser engine."
+    correctOptionId: 1
     explanation: "React Strict Mode simulates unmounting and re-mounting in development to help developers catch missing cleanup functions."
     type: "QUIZ"
 
@@ -107,20 +127,28 @@ questions:
       }, [options]);
       ```
     options:
-      - "The effect will run on every single re-render because object references are compared by equality (`{}` !== `{}`)."
-      - "The effect will never run."
-      - "It triggers a TypeScript compile error."
-      - "React automatically deep-compares the object properties."
-    correctAnswer: "The effect will run on every single re-render because object references are compared by equality (`{}` !== `{}`)."
+      - id: 1
+        text: "The effect will run on every single re-render because object references are compared by equality (`{}` !== `{}`)."
+      - id: 2
+        text: "The effect will never run."
+      - id: 3
+        text: "It triggers a TypeScript compile error."
+      - id: 4
+        text: "React automatically deep-compares the object properties."
+    correctOptionId: 1
     explanation: "React uses shallow referential equality (`Object.is`). A newly created object literal on every render has a new memory reference, causing the effect to trigger infinitely."
     type: "QUIZ"
 
   - questionText: "When is `useEffect` *not* needed?"
     options:
-      - "When transforming data for display based on existing props or state (which should be done during rendering)"
-      - "When communicating with external APIs"
-      - "When setting up manual browser event listeners"
-      - "When establishing WebSocket subscriptions"
-    correctAnswer: "When transforming data for display based on existing props or state (which should be done during rendering)"
+      - id: 1
+        text: "When transforming data for display based on existing props or state (which should be done during rendering)"
+      - id: 2
+        text: "When communicating with external APIs"
+      - id: 3
+        text: "When setting up manual browser event listeners"
+      - id: 4
+        text: "When establishing WebSocket subscriptions"
+    correctOptionId: 1
     explanation: "You do not need an effect just to transform state data for rendering; calculate it directly in the component body to avoid unnecessary extra render passes."
     type: "QUIZ"

@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import GoalSetupPage from './pages/GoalSetupPage';
+import DiagnosticPage from './pages/DiagnosticPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path='/goals/new' element={<GoalSetupPage/>}/>
+        <Route path="/diagnostic/:goalId" element={<DiagnosticPage />} />
       </Route>
     </Routes>
   );

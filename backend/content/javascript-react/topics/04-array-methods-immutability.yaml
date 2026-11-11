@@ -29,21 +29,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "Which array method should you use to transform every element of an array into a new array of the same length?"
     options:
-      - "filter()"
-      - "reduce()"
-      - "map()"
-      - "forEach()"
-    correctAnswer: "map()"
+      - id: 1
+        text: "filter()"
+      - id: 2
+        text: "reduce()"
+      - id: 3
+        text: "map()"
+      - id: 4
+        text: "forEach()"
+    correctOptionId: 3
     explanation: "`map()` creates a brand-new array populated with the results of calling a provided function on every element in the calling array."
     type: "DIAGNOSTIC"
 
   - questionText: "Why is data immutability emphasized in modern frontend libraries like React?"
     options:
-      - "It ensures that objects take up less memory in the browser heap."
-      - "It allows React to efficiently detect state changes and trigger reliable re-renders."
-      - "It prevents JavaScript from throwing syntax errors during compilation."
-      - "It replaces the need for asynchronous network requests."
-    correctAnswer: "It allows React to efficiently detect state changes and trigger reliable re-renders."
+      - id: 1
+        text: "It ensures that objects take up less memory in the browser heap."
+      - id: 2
+        text: "It allows React to efficiently detect state changes and trigger reliable re-renders."
+      - id: 3
+        text: "It prevents JavaScript from throwing syntax errors during compilation."
+      - id: 4
+        text: "It replaces the need for asynchronous network requests."
+    correctOptionId: 2
     explanation: "Immutability makes state changes predictable and enables fast reference equality checks (`===`) during reconciliation."
     type: "DIAGNOSTIC"
 
@@ -56,21 +64,29 @@ questions:
       console.log(result);
       ```
     options:
-      - "10"
-      - "20"
-      - "14"
-      - "24"
-    correctAnswer: "20"
+      - id: 1
+        text: "10"
+      - id: 2
+        text: "20"
+      - id: 3
+        text: "14"
+      - id: 4
+        text: "24"
+    correctOptionId: 2
     explanation: "The initial value of the accumulator (`acc`) is set to `10`. Summing elements `1 + 2 + 3 + 4` equals `10`, plus the initial accumulator `10` gives a total of `20`."
     type: "QUIZ"
 
   - questionText: "Which of the following array methods modifies the original array in place (mutates it) instead of returning a new array?"
     options:
-      - "map()"
-      - "filter()"
-      - "sort()"
-      - "concat()"
-    correctAnswer: "sort()"
+      - id: 1
+        text: "map()"
+      - id: 2
+        text: "filter()"
+      - id: 3
+        text: "sort()"
+      - id: 4
+        text: "concat()"
+    correctOptionId: 3
     explanation: "`sort()` (along with `splice()` and `push()`) mutates the original array in place, whereas `map`, `filter`, and `concat` return new arrays."
     type: "QUIZ"
 
@@ -83,21 +99,29 @@ questions:
       console.log(user.address.city);
       ```
     options:
-      - "New York"
-      - "London"
-      - "undefined"
-      - "TypeError"
-    correctAnswer: "London"
+      - id: 1
+        text: "New York"
+      - id: 2
+        text: "London"
+      - id: 3
+        text: "undefined"
+      - id: 4
+        text: "TypeError"
+    correctOptionId: 2
     explanation: "Object spread (`...`) performs a **shallow copy**. Nested objects like `address` are still shared by reference between `user` and `updatedUser`, so mutating `updatedUser.address.city` mutates the original `user` object as well."
     type: "QUIZ"
 
   - questionText: "How can you extract the first element of an array and assign the remaining elements into a new array using destructuring?"
     options:
-      - "const [first, ...rest] = array;"
-      - "const [first, rest...] = array;"
-      - "const {first, rest} = array;"
-      - "const [first, slice(rest)] = array;"
-    correctAnswer: "const [first, ...rest] = array;"
+      - id: 1
+        text: "const [first, ...rest] = array;"
+      - id: 2
+        text: "const [first, rest...] = array;"
+      - id: 3
+        text: "const {first, rest} = array;"
+      - id: 4
+        text: "const [first, slice(rest)] = array;"
+    correctOptionId: 1
     explanation: "The rest syntax (`...rest`) collects all remaining array elements into a new array after the initial destructuring assignments."
     type: "QUIZ"
 
@@ -109,10 +133,14 @@ questions:
       console.log(theme, notifications);
       ```
     options:
-      - "dark, false"
-      - "dark, true"
-      - "undefined, true"
-      - "TypeError"
-    correctAnswer: "dark, true"
+      - id: 1
+        text: "dark, false"
+      - id: 2
+        text: "dark, true"
+      - id: 3
+        text: "undefined, true"
+      - id: 4
+        text: "TypeError"
+    correctOptionId: 2
     explanation: "Default values in destructuring (e.g., `notifications = true`) are only applied if the extracted property is `undefined` in the source object."
     type: "QUIZ"

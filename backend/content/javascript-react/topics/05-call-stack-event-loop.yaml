@@ -29,21 +29,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What is the primary role of the Call Stack in JavaScript's execution engine?"
     options:
-      - "To manage asynchronous network requests and fetch responses"
-      - "To keep track of function execution contexts and determine where the program is in its execution"
-      - "To store styling sheets and render DOM nodes"
-      - "To handle garbage collection for unreferenced objects"
-    correctAnswer: "To keep track of function execution contexts and determine where the program is in its execution"
+      - id: 1
+        text: "To manage asynchronous network requests and fetch responses"
+      - id: 2
+        text: "To keep track of function execution contexts and determine where the program is in its execution"
+      - id: 3
+        text: "To store styling sheets and render DOM nodes"
+      - id: 4
+        text: "To handle garbage collection for unreferenced objects"
+    correctOptionId: 2
     explanation: "The call stack is a LIFO (Last In, First Out) data structure that records where in the program we currently are by stacking function calls."
     type: "DIAGNOSTIC"
 
   - questionText: "Which queue has higher priority in JavaScript's event loop processing: the Task Queue (Macrotask) or the Microtask Queue?"
     options:
-      - "Task Queue"
-      - "Microtask Queue"
-      - "They share equal priority and run concurrently"
-      - "Priority depends on the browser's operating system"
-    correctAnswer: "Microtask Queue"
+      - id: 1
+        text: "Task Queue"
+      - id: 2
+        text: "Microtask Queue"
+      - id: 3
+        text: "They share equal priority and run concurrently"
+      - id: 4
+        text: "Priority depends on the browser's operating system"
+    correctOptionId: 2
     explanation: "The event loop always completely empties the Microtask Queue (containing Promises and `queueMicrotask`) before moving on to any tasks in the Macrotask Queue."
     type: "DIAGNOSTIC"
 
@@ -57,21 +65,29 @@ questions:
       console.log('4');
       ```
     options:
-      - "1, 2, 3, 4"
-      - "1, 4, 3, 2"
-      - "1, 4, 2, 3"
-      - "3, 2, 1, 4"
-    correctAnswer: "1, 4, 3, 2"
+      - id: 1
+        text: "1, 2, 3, 4"
+      - id: 2
+        text: "1, 4, 3, 2"
+      - id: 3
+        text: "1, 4, 2, 3"
+      - id: 4
+        text: "3, 2, 1, 4"
+    correctOptionId: 2
     explanation: "Synchronous code runs first ('1', '4'). Next, microtasks (Promise '3') are executed before any macrotasks (`setTimeout` '2')."
     type: "QUIZ"
 
   - questionText: "What causes a 'RangeError: Maximum call stack size exceeded' (Stack Overflow) error?"
     options:
-      - "An infinite recursive function call without a proper base case"
-      - "A Promise that resolves with too many arguments"
-      - "Running out of storage space in `localStorage`"
-      - "Exceeding the maximum number of items in a `setTimeout` callback queue"
-    correctAnswer: "An infinite recursive function call without a proper base case"
+      - id: 1
+        text: "An infinite recursive function call without a proper base case"
+      - id: 2
+        text: "A Promise that resolves with too many arguments"
+      - id: 3
+        text: "Running out of storage space in `localStorage`"
+      - id: 4
+        text: "Exceeding the maximum number of items in a `setTimeout` callback queue"
+    correctOptionId: 1
     explanation: "If functions keep calling each other or themselves without returning, the call stack exceeds its fixed memory allocation."
     type: "QUIZ"
 
@@ -84,21 +100,29 @@ questions:
       console.log('D');
       ```
     options:
-      - "A, B, C, D"
-      - "D, B, A, C"
-      - "D, A, B, C"
-      - "B, D, A, C"
-    correctAnswer: "D, B, A, C"
+      - id: 1
+        text: "A, B, C, D"
+      - id: 2
+        text: "D, B, A, C"
+      - id: 3
+        text: "D, A, B, C"
+      - id: 4
+        text: "B, D, A, C"
+    correctOptionId: 2
     explanation: "Synchronous 'D' logs first. Then the promise microtask 'B' runs. Finally, the macrotasks 'A' and 'C' run in FIFO order."
     type: "QUIZ"
 
   - questionText: "Where do asynchronous Web APIs like `setTimeout` or `fetch` place their callback functions when their wait or network operation finishes?"
     options:
-      - "Directly onto the Call Stack"
-      - "Into the Task Queue or Microtask Queue"
-      - "Into the Local Storage cache"
-      - "Into the React Virtual DOM buffer"
-    correctAnswer: "Into the Task Queue or Microtask Queue"
+      - id: 1
+        text: "Directly onto the Call Stack"
+      - id: 2
+        text: "Into the Task Queue or Microtask Queue"
+      - id: 3
+        text: "Into the Local Storage cache"
+      - id: 4
+        text: "Into the React Virtual DOM buffer"
+    correctOptionId: 2
     explanation: "Web APIs handle async operations in the background and push their callbacks into the respective queues once completed, waiting for the event loop to transfer them to the call stack."
     type: "QUIZ"
 
@@ -114,10 +138,14 @@ questions:
       console.log('End');
       ```
     options:
-      - "Start, End, Timeout, Promise inside Timeout, Promise 1"
-      - "Start, End, Promise 1, Timeout, Promise inside Timeout"
-      - "Start, Timeout, Promise 1, End, Promise inside Timeout"
-      - "Start, End, Promise 1, Promise inside Timeout, Timeout"
-    correctAnswer: "Start, End, Promise 1, Timeout, Promise inside Timeout"
+      - id: 1
+        text: "Start, End, Timeout, Promise inside Timeout, Promise 1"
+      - id: 2
+        text: "Start, End, Promise 1, Timeout, Promise inside Timeout"
+      - id: 3
+        text: "Start, Timeout, Promise 1, End, Promise inside Timeout"
+      - id: 4
+        text: "Start, End, Promise 1, Promise inside Timeout, Timeout"
+    correctOptionId: 2
     explanation: "1. 'Start' and 'End' log synchronously. 2. 'Promise 1' logs from the initial microtask queue. 3. The event loop picks the `setTimeout` macrotask, logging 'Timeout', which immediately queues a new microtask that logs 'Promise inside Timeout'."
     type: "QUIZ"

@@ -48,6 +48,7 @@ model Topic {
   questions Question[]
   attempts  Attempt[]
   planTasks PlanTask[]
+  assessmentResults TopicAssessmentResult[]
 
   @@unique([subjectId, sequenceOrder])
   @@map("topics")
@@ -116,15 +117,15 @@ enum KnowledgeLevel {
 }
 
 model Question {
-  id            Int             @id @default(autoincrement())
-  topicId       Int             @map("topic_id")
-  purpose       AssessmentType
-  questionText  String          @map("question_text")
-  options       Json
-  correctAnswer String          @map("correct_answer")
-  explanation   String
-  topic         Topic           @relation(fields: [topicId], references: [id])
-  answers       AttemptAnswer[]
+  id              Int             @id @default(autoincrement())
+  topicId         Int             @map("topic_id")
+  purpose         AssessmentType
+  questionText    String          @map("question_text")
+  options         Json
+  correctOptionId Int             @map("correct_option_id")
+  explanation     String
+  topic           Topic           @relation(fields: [topicId], references: [id])
+  answers         AttemptAnswer[]
 
   @@index([topicId, purpose])
   @@map("questions")
@@ -139,24 +140,41 @@ model Attempt {
   correctCount   Int             @default(0) @map("correct_count")
   totalQuestions Int             @map("total_questions")
   knowledgeLevel KnowledgeLevel? @map("knowledge_level")
+  overallScore   Int?            @map("overall_score")
   startedAt      DateTime        @default(now()) @map("started_at")
   completedAt    DateTime?       @map("completed_at")
   goal           LearningGoal    @relation(fields: [goalId], references: [id], onDelete: Cascade)
   topic          Topic?          @relation(fields: [topicId], references: [id])
   answers        AttemptAnswer[]
+  topicResults   TopicAssessmentResult[]
 
   @@index([goalId, topicId])
   @@map("attempts")
 }
 
+model TopicAssessmentResult {
+  id             Int             @id @default(autoincrement())
+  attemptId      Int             @map("attempt_id")
+  topicId        Int             @map("topic_id")
+  correctCount   Int             @map("correct_count")
+  totalQuestions Int             @map("total_questions")
+  scorePercentage Int            @map("score_percentage")
+  knowledgeLevel KnowledgeLevel  @map("knowledge_level")
+  attempt        Attempt         @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  topic          Topic           @relation(fields: [topicId], references: [id])
+
+  @@unique([attemptId, topicId])
+  @@map("topic_assessment_results")
+}
+
 model AttemptAnswer {
-  id             Int      @id @default(autoincrement())
-  attemptId      Int      @map("attempt_id")
-  questionId     Int      @map("question_id")
-  selectedAnswer String   @map("selected_answer")
-  isCorrect      Boolean  @map("is_correct")
-  attempt        Attempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
-  question       Question @relation(fields: [questionId], references: [id])
+  id                  Int       @id @default(autoincrement())
+  attemptId           Int       @map("attempt_id")
+  questionId          Int       @map("question_id")
+  selectedOptionId    Int       @map("selected_option_id")
+  isCorrect           Boolean   @map("is_correct")
+  attempt             Attempt   @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question            Question  @relation(fields: [questionId], references: [id])
 
   @@unique([attemptId, questionId])
   @@map("attempt_answers")

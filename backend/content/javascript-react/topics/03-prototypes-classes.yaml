@@ -27,21 +27,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What is the prototype chain in JavaScript used for?"
     options:
-      - "Managing asynchronous task queues in the event loop"
-      - "Resolving property and method lookups dynamically across linked objects"
-      - "Encrypting private class fields"
-      - "Structuring React component trees"
-    correctAnswer: "Resolving property and method lookups dynamically across linked objects"
+      - id: 1
+        text: "Managing asynchronous task queues in the event loop"
+      - id: 2
+        text: "Resolving property and method lookups dynamically across linked objects"
+      - id: 3
+        text: "Encrypting private class fields"
+      - id: 4
+        text: "Structuring React component trees"
+    correctOptionId: 2
     explanation: "When trying to access a property that doesn't exist on an object, JavaScript walks up its prototype chain until it finds the property or reaches `null`."
     type: "DIAGNOSTIC"
 
   - questionText: "How do ES6 classes relate to JavaScript's underlying prototype system?"
     options:
-      - "ES6 classes completely replace prototypes with a traditional class-based model."
-      - "ES6 classes are syntactic sugar over JavaScript's existing prototypal inheritance."
-      - "ES6 classes can only be used with TypeScript compilation."
-      - "ES6 classes run faster because they bypass prototypes entirely."
-    correctAnswer: "ES6 classes are syntactic sugar over JavaScript's existing prototypal inheritance."
+      - id: 1
+        text: "ES6 classes completely replace prototypes with a traditional class-based model."
+      - id: 2
+        text: "ES6 classes are syntactic sugar over JavaScript's existing prototypal inheritance."
+      - id: 3
+        text: "ES6 classes can only be used with TypeScript compilation."
+      - id: 4
+        text: "ES6 classes run faster because they bypass prototypes entirely."
+    correctOptionId: 2
     explanation: "Under the hood, ES6 classes use prototype-based inheritance; `class` is cleaner syntax for writing constructor functions and setting up prototypes."
     type: "DIAGNOSTIC"
 
@@ -57,21 +65,29 @@ questions:
       console.log(rabbit.hasOwnProperty('eats'));
       ```
     options:
-      - "true, true"
-      - "true, false"
-      - "undefined, false"
-      - '"true, true" (with prototype error)'
-    correctAnswer: "true, false"
+      - id: 1
+        text: "true, true"
+      - id: 2
+        text: "true, false"
+      - id: 3
+        text: "undefined, false"
+      - id: 4
+        text: '"true, true" (with prototype error)'
+    correctOptionId: 2
     explanation: "`rabbit.eats` resolves to `true` by looking up the prototype chain (`animal`), but `hasOwnProperty` returns `false` because `eats` belongs to the prototype, not `rabbit` directly."
     type: "QUIZ"
 
   - questionText: "Which property points to an object's prototype in modern JavaScript environments?"
     options:
-      - "__proto__ (or Object.getPrototypeOf())"
-      - "prototypeChain"
-      - "parentObject"
-      - "superPrototype"
-    correctAnswer: "__proto__ (or Object.getPrototypeOf())"
+      - id: 1
+        text: "__proto__ (or Object.getPrototypeOf())"
+      - id: 2
+        text: "prototypeChain"
+      - id: 3
+        text: "parentObject"
+      - id: 4
+        text: "superPrototype"
+    correctOptionId: 1
     explanation: "Every object has an internal `[[Prototype]]` link accessible via `__proto__` or `Object.getPrototypeOf()`."
     type: "QUIZ"
 
@@ -86,21 +102,29 @@ questions:
       }
       ```
     options:
-      - "It returns 'Some sound'"
-      - "It returns 'Bark'"
-      - "It throws a ReferenceError"
-      - "It returns undefined"
-    correctAnswer: "It returns 'Bark'"
+      - id: 1
+        text: "It returns 'Some sound'"
+      - id: 2
+        text: "It returns 'Bark'"
+      - id: 3
+        text: "It throws a ReferenceError"
+      - id: 4
+        text: "It returns undefined"
+    correctOptionId: 2
     explanation: "Method overriding allows the subclass (`Dog`) to override a method inherited from its superclass (`Animal`)."
     type: "QUIZ"
 
   - questionText: "What is the purpose of the `super()` call inside a subclass constructor in ES6?"
     options:
-      - "To allocate memory for a new object instance"
-      - "To call the parent class constructor and initialize inherited properties"
-      - "To convert regular functions into arrow functions"
-      - "To export the class to external modules"
-    correctAnswer: "To call the parent class constructor and initialize inherited properties"
+      - id: 1
+        text: "To allocate memory for a new object instance"
+      - id: 2
+        text: "To call the parent class constructor and initialize inherited properties"
+      - id: 3
+        text: "To convert regular functions into arrow functions"
+      - id: 4
+        text: "To export the class to external modules"
+    correctOptionId: 2
     explanation: "In a derived class, `super()` must be called before accessing `this` to execute the parent class constructor."
     type: "QUIZ"
 
@@ -117,10 +141,14 @@ questions:
       console.log(user1.sayHi());
       ```
     options:
-      - "TypeError: user1.sayHi is not a function"
-      - "Hi, Alice"
-      - "Hi, undefined"
-      - "ReferenceError"
-    correctAnswer: "Hi, Alice"
+      - id: 1
+        text: "TypeError: user1.sayHi is not a function"
+      - id: 2
+        text: "Hi, Alice"
+      - id: 3
+        text: "Hi, undefined"
+      - id: 4
+        text: "ReferenceError"
+    correctOptionId: 2
     explanation: "Methods defined on `User.prototype` are shared and accessible by all instances created with `new User()`, so `user1.sayHi()` executes successfully."
     type: "QUIZ"

@@ -33,21 +33,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What are the three possible states of a JavaScript Promise?"
     options:
-      - "Started, Paused, Stopped"
-      - "Pending, Fulfilled, Rejected"
-      - "Loading, Success, Failure"
-      - "Active, Waiting, Completed"
-    correctAnswer: "Pending, Fulfilled, Rejected"
+      - id: 1
+        text: "Started, Paused, Stopped"
+      - id: 2
+        text: "Pending, Fulfilled, Rejected"
+      - id: 3
+        text: "Loading, Success, Failure"
+      - id: 4
+        text: "Active, Waiting, Completed"
+    correctOptionId: 2
     explanation: "A Promise is always in one of three states: pending (initial state), fulfilled (operation completed successfully), or rejected (operation failed)."
     type: "DIAGNOSTIC"
 
   - questionText: "How does the `async/await` syntax relate to Promises in JavaScript?"
     options:
-      - "It replaces Promises entirely with multithreaded background workers."
-      - "It is syntactic sugar built on top of Promises, making asynchronous code read synchronously."
-      - "It can only be used with synchronous file system calls."
-      - "It automatically prevents all runtime errors without try/catch blocks."
-    correctAnswer: "It is syntactic sugar built on top of Promises, making asynchronous code read synchronously."
+      - id: 1
+        text: "It replaces Promises entirely with multithreaded background workers."
+      - id: 2
+        text: "It is syntactic sugar built on top of Promises, making asynchronous code read synchronously."
+      - id: 3
+        text: "It can only be used with synchronous file system calls."
+      - id: 4
+        text: "It automatically prevents all runtime errors without try/catch blocks."
+    correctOptionId: 2
     explanation: "`async/await` is a cleaner, more readable way to work with promises, where `async` functions always return a promise and `await` pauses execution until the promise settles."
     type: "DIAGNOSTIC"
 
@@ -63,21 +71,29 @@ questions:
         .then((x) => console.log(x));
       ```
     options:
-      - "2"
-      - "3"
-      - "4"
-      - "Error: Oops"
-    correctAnswer: "4"
+      - id: 1
+        text: "2"
+      - id: 2
+        text: "3"
+      - id: 3
+        text: "4"
+      - id: 4
+        text: "Error: Oops"
+    correctOptionId: 3
     explanation: "1. Starts at 1. 2. `.then` adds 1 to become 2. 3. `.then` throws an error. 4. `.catch` catches it and returns 3. 5. Next `.then` receives 3 and adds 1 to log 4."
     type: "QUIZ"
 
   - questionText: "Which static Promise method rejects immediately as soon as *any* of the input promises rejects, without waiting for the others?"
     options:
-      - "Promise.all()"
-      - "Promise.allSettled()"
-      - "Promise.race()"
-      - "Promise.any()"
-    correctAnswer: "Promise.all()"
+      - id: 1
+        text: "Promise.all()"
+      - id: 2
+        text: "Promise.allSettled()"
+      - id: 3
+        text: "Promise.race()"
+      - id: 4
+        text: "Promise.any()"
+    correctOptionId: 1
     explanation: "`Promise.all()` fails fast: if any single promise rejects, the entire returned promise rejects immediately."
     type: "QUIZ"
 
@@ -89,21 +105,29 @@ questions:
       }
       ```
     options:
-      - "A string: 'Hello StudyPilot'"
-      - "A Promise resolved with the string 'Hello StudyPilot'"
-      - "undefined"
-      - "An error"
-    correctAnswer: "A Promise resolved with the string 'Hello StudyPilot'"
+      - id: 1
+        text: "A string: 'Hello StudyPilot'"
+      - id: 2
+        text: "A Promise resolved with the string 'Hello StudyPilot'"
+      - id: 3
+        text: "undefined"
+      - id: 4
+        text: "An error"
+    correctOptionId: 2
     explanation: "An `async` function always wraps its return value in a resolved Promise (unless it explicitly throws or returns another promise)."
     type: "QUIZ"
 
   - questionText: "When should you use `Promise.allSettled()` instead of `Promise.all()`?"
     options:
-      - "When you want to execute requests sequentially instead of concurrently."
-      - "When you want the result regardless of whether some promises fail or reject."
-      - "When you only care about the fastest responding promise."
-      - "When you want to save memory on large arrays."
-    correctAnswer: "When you want the result regardless of whether some promises fail or reject."
+      - id: 1
+        text: "When you want to execute requests sequentially instead of concurrently."
+      - id: 2
+        text: "When you want the result regardless of whether some promises fail or reject."
+      - id: 3
+        text: "When you only care about the fastest responding promise."
+      - id: 4
+        text: "When you want to save memory on large arrays."
+    correctOptionId: 2
     explanation: "`Promise.allSettled()` waits for all input promises to complete (whether fulfilled or rejected), returning an array of objects describing the outcome of each."
     type: "QUIZ"
 
@@ -119,10 +143,14 @@ questions:
       console.log('C');
       ```
     options:
-      - "A, B, C"
-      - "A, C, B"
-      - "C, A, B"
-      - "A, B, C (all synchronous)"
-    correctAnswer: "A, C, B"
+      - id: 1
+        text: "A, B, C"
+      - id: 2
+        text: "A, C, B"
+      - id: 3
+        text: "C, A, B"
+      - id: 4
+        text: "A, B, C (all synchronous)"
+    correctOptionId: 2
     explanation: "1. 'A' logs synchronously. 2. `await` pauses the function and schedules the rest as a microtask, returning control to the caller. 3. 'C' logs synchronously. 4. The microtask queue runs, logging 'B'."
     type: "QUIZ"

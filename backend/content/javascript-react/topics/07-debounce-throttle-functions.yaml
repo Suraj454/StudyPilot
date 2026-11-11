@@ -32,21 +32,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What is the primary difference between debouncing and throttling?"
     options:
-      - "Debouncing delays execution until a certain amount of time has passed *without* new calls, whereas throttling ensures execution at regular intervals."
-      - "Throttling cancels all function calls permanently, whereas debouncing retries them automatically."
-      - "Debouncing is used exclusively for network requests, while throttling is only for CSS animations."
-      - "There is no difference; they are interchangeable terms."
-    correctAnswer: "Debouncing delays execution until a certain amount of time has passed *without* new calls, whereas throttling ensures execution at regular intervals."
+      - id: 1
+        text: "Debouncing delays execution until a certain amount of time has passed *without* new calls, whereas throttling ensures execution at regular intervals."
+      - id: 2
+        text: "Throttling cancels all function calls permanently, whereas debouncing retries them automatically."
+      - id: 3
+        text: "Debouncing is used exclusively for network requests, while throttling is only for CSS animations."
+      - id: 4
+        text: "There is no difference; they are interchangeable terms."
+    correctOptionId: 1
     explanation: "Debounce groups multiple rapid calls into a single call after typing stops, while throttle guarantees periodic execution (e.g., once every 300ms) during continuous events like scrolling."
     type: "DIAGNOSTIC"
 
   - questionText: "What is a Higher-Order Function (HOF) in JavaScript?"
     options:
-      - "A function that runs in the highest memory stack of the browser"
-      - "A function that takes another function as an argument, returns a function, or both"
-      - "A function declared using the `async` keyword"
-      - "A class constructor method"
-    correctAnswer: "A function that takes another function as an argument, returns a function, or both"
+      - id: 1
+        text: "A function that runs in the highest memory stack of the browser"
+      - id: 2
+        text: "A function that takes another function as an argument, returns a function, or both"
+      - id: 3
+        text: "A function declared using the `async` keyword"
+      - id: 4
+        text: "A class constructor method"
+    correctOptionId: 2
     explanation: "Higher-order functions (like `map`, `filter`, or custom wrappers like `debounce`) treat functions as first-class citizens."
     type: "DIAGNOSTIC"
 
@@ -57,21 +65,29 @@ questions:
       const handleSearch = debounce(fetchResults, 300);
       ```
     options:
-      - "Every 100ms as each character is typed"
-      - "Once, 300ms after the user *stops* typing completely"
-      - "Exactly after the first character is typed"
-      - "Only when the user presses the Enter key"
-    correctAnswer: "Once, 300ms after the user *stops* typing completely"
+      - id: 1
+        text: "Every 100ms as each character is typed"
+      - id: 2
+        text: "Once, 300ms after the user *stops* typing completely"
+      - id: 3
+        text: "Exactly after the first character is typed"
+      - id: 4
+        text: "Only when the user presses the Enter key"
+    correctOptionId: 2
     explanation: "Debouncing resets the timer on every keystroke, delaying execution until the specified quiescent period has elapsed."
     type: "QUIZ"
 
   - questionText: "Which use case is best suited for **throttling** rather than debouncing?"
     options:
-      - "Real-time autocomplete search suggestions as a user types"
-      - "Saving form changes automatically after the user finishes editing"
-      - "Tracking window resize events or scroll position for infinite loading"
-      - "Submitting a payment form button to prevent double-clicks"
-    correctAnswer: "Tracking window resize events or scroll position for infinite loading"
+      - id: 1
+        text: "Real-time autocomplete search suggestions as a user types"
+      - id: 2
+        text: "Saving form changes automatically after the user finishes editing"
+      - id: 3
+        text: "Tracking window resize events or scroll position for infinite loading"
+      - id: 4
+        text: "Submitting a payment form button to prevent double-clicks"
+    correctOptionId: 3
     explanation: "Scroll and resize events fire hundreds of times per second; throttling ensures handlers fire at a controlled rate (e.g., once every 100ms) rather than waiting until scrolling stops."
     type: "QUIZ"
 
@@ -81,21 +97,29 @@ questions:
       const add = (a) => (b) => a + b;
       ```
     options:
-      - "5"
-      - "A function waiting for the next argument"
-      - "TypeError"
-      - "undefined"
-    correctAnswer: "5"
+      - id: 1
+        text: "5"
+      - id: 2
+        text: "A function waiting for the next argument"
+      - id: 3
+        text: "TypeError"
+      - id: 4
+        text: "undefined"
+    correctOptionId: 1
     explanation: "Currying transforms a function with multiple arguments into a nested sequence of functions, each taking a single argument. `add(2)` returns a closure expecting `b`, which then returns `2 + 3 = 5`."
     type: "QUIZ"
 
   - questionText: "What is function currying primarily used for in JavaScript?"
     options:
-      - "To convert asynchronous promises into synchronous blocking code"
-      - "To create specialized, reusable functions by partially applying arguments"
-      - "To optimize memory allocation for large arrays"
-      - "To automatically bind `this` to arrow functions"
-    correctAnswer: "To create specialized, reusable functions by partially applying arguments"
+      - id: 1
+        text: "To convert asynchronous promises into synchronous blocking code"
+      - id: 2
+        text: "To create specialized, reusable functions by partially applying arguments"
+      - id: 3
+        text: "To optimize memory allocation for large arrays"
+      - id: 4
+        text: "To automatically bind `this` to arrow functions"
+    correctOptionId: 2
     explanation: "Currying allows you to pre-fill configuration arguments and create specialized utility functions."
     type: "QUIZ"
 
@@ -107,10 +131,14 @@ questions:
       const compose = (f, g) => x => f(g(x));
       ```
     options:
-      - "12"
-      - "18"
-      - "36"
-      - "6"
-    correctAnswer: "18"
+      - id: 1
+        text: "12"
+      - id: 2
+        text: "18"
+      - id: 3
+        text: "36"
+      - id: 4
+        text: "6"
+    correctOptionId: 2
     explanation: "Composition executes from right to left: `square(3)` evaluates to `9`, then `double(9)` evaluates to `18`."
     type: "QUIZ"

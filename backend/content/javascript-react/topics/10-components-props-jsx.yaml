@@ -31,21 +31,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What is JSX in the context of React development?"
     options:
-      - "A strict database query language used by Prisma"
-      - "A syntax extension for JavaScript that allows writing HTML-like code inside JS files"
-      - "A styling preprocessor that replaces CSS modules"
-      - "An external build-time compiler for PostgreSQL schemas"
-    correctAnswer: "A syntax extension for JavaScript that allows writing HTML-like code inside JS files"
+      - id: 1
+        text: "A strict database query language used by Prisma"
+      - id: 2
+        text: "A syntax extension for JavaScript that allows writing HTML-like code inside JS files"
+      - id: 3
+        text: "A styling preprocessor that replaces CSS modules"
+      - id: 4
+        text: "An external build-time compiler for PostgreSQL schemas"
+    correctOptionId: 2
     explanation: "JSX produces React 'elements' that get compiled down to standard JavaScript function calls (`React.createElement`) by tools like Babel."
     type: "DIAGNOSTIC"
 
   - questionText: "How are `props` passed from a parent component to a child component in React?"
     options:
-      - "As read-only attributes resembling HTML attributes on the component tag"
-      - "As globally mutable variables stored in window state"
-      - "Through CSS custom properties injected at runtime"
-      - "Using asynchronous event emitters exclusively"
-    correctAnswer: "As read-only attributes resembling HTML attributes on the component tag"
+      - id: 1
+        text: "As read-only attributes resembling HTML attributes on the component tag"
+      - id: 2
+        text: "As globally mutable variables stored in window state"
+      - id: 3
+        text: "Through CSS custom properties injected at runtime"
+      - id: 4
+        text: "Using asynchronous event emitters exclusively"
+    correctOptionId: 1
     explanation: "Props are immutable parameters passed down from parent components, flowing in a strict unidirectional data flow."
     type: "DIAGNOSTIC"
 
@@ -59,21 +67,29 @@ questions:
       // Rendered as: <Greeting name/>
       ```
     options:
-      - "Hello, Guest"
-      - '"Hello, " (empty string)'
-      - "Hello, undefined"
-      - "TypeError"
-    correctAnswer: '"Hello, " (empty string)'
+      - id: 1
+        text: "Hello, Guest"
+      - id: 2
+        text: '"Hello, " (empty string)'
+      - id: 3
+        text: "Hello, undefined"
+      - id: 4
+        text: "TypeError"
+    correctOptionId: 2
     explanation: 'Default parameters in JS destructuring (e.g., name = "Guest") only trigger if the argument is explicitly undefined. Passing an empty string "" treats it as a defined falsy value, overriding the default.'
     type: "QUIZ"
 
   - questionText: "Which JSX rule must be followed when returning multiple root elements from a component function?"
     options:
-      - "They must be separated by comma operators."
-      - "They must be wrapped inside a single parent element or a React Fragment (`<>...</>`)."
-      - "They must be converted into string templates first."
-      - "They must be declared inside global window variables."
-    correctAnswer: "They must be wrapped inside a single parent element or a React Fragment (`<>...</>`)."
+      - id: 1
+        text: "They must be separated by comma operators."
+      - id: 2
+        text: "They must be wrapped inside a single parent element or a React Fragment (`<>...</>`)."
+      - id: 3
+        text: "They must be converted into string templates first."
+      - id: 4
+        text: "They must be declared inside global window variables."
+    correctOptionId: 2
     explanation: "Under the hood, JSX compiles down to a single function call, meaning a component can only return one root node unless wrapped in a parent or Fragment."
     type: "QUIZ"
 
@@ -89,21 +105,29 @@ questions:
       }
       ```
     options:
-      - "Nothing is rendered"
-      - "0 is rendered on the UI"
-      - "<p>You have items!</p>"
-      - "TypeError"
-    correctAnswer: "0 is rendered on the UI"
+      - id: 1
+        text: "Nothing is rendered"
+      - id: 2
+        text: "0 is rendered on the UI"
+      - id: 3
+        text: "<p>You have items!</p>"
+      - id: 4
+        text: "TypeError"
+    correctOptionId: 2
     explanation: "In JavaScript logical `&&` evaluation, `0 && <p>` evaluates to `0` because `0` is falsy. React renders the number `0` directly to the DOM instead of ignoring it. (Correct idiom: `items.length > 0 && ...`)."
     type: "QUIZ"
 
   - questionText: "What is component composition in React?"
     options:
-      - "Combining multiple independent components together (often via the `children` prop) to build complex UIs"
-      - "Inheriting classes from a base Component class using `extends`"
-      - "Merging multiple reducers into a single state store"
-      - "Bundling production scripts using Webpack"
-    correctAnswer: "Combining multiple independent components together (often via the `children` prop) to build complex UIs"
+      - id: 1
+        text: "Combining multiple independent components together (often via the `children` prop) to build complex UIs"
+      - id: 2
+        text: "Inheriting classes from a base Component class using `extends`"
+      - id: 3
+        text: "Merging multiple reducers into a single state store"
+      - id: 4
+        text: "Bundling production scripts using Webpack"
+    correctOptionId: 1
     explanation: |
       React favors component composition over inheritance for code reuse, combining components hierarchically via props like `children`.
     type: "QUIZ"
@@ -117,10 +141,14 @@ questions:
       }
       ```
     options:
-      - "It logs 'Clicked!' only when clicked."
-      - "It executes `handleClick('Clicked!')` immediately during component render time, not on click."
-      - "It throws a TypeScript compilation error."
-      - "It ignores the event handler entirely."
-    correctAnswer: "It executes `handleClick('Clicked!')` immediately during component render time, not on click."
+      - id: 1
+        text: "It logs 'Clicked!' only when clicked."
+      - id: 2
+        text: "It executes `handleClick('Clicked!')` immediately during component render time, not on click."
+      - id: 3
+        text: "It throws a TypeScript compilation error."
+      - id: 4
+        text: "It ignores the event handler entirely."
+    correctOptionId: 2
     explanation: "Passing `handleClick('Clicked!')` with parentheses invokes the function immediately on render. To pass arguments on click, it must be wrapped in an arrow function: `onClick={() => handleClick('Clicked!')}`."
     type: "QUIZ"

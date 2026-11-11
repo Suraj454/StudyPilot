@@ -33,62 +33,86 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What is the primary difference in lifespan between `localStorage` and `sessionStorage`?"
     options:
-      - "`localStorage` data persists even after the browser window is closed, whereas `sessionStorage` is cleared when the tab or window is closed."
-      - "`localStorage` expires automatically after 24 hours, while `sessionStorage` lasts forever."
-      - "`sessionStorage` can be shared across different browser domains, while `localStorage` is restricted to one tab."
-      - "There is no difference; both persist indefinitely until explicitly cleared."
-    correctAnswer: "`localStorage` data persists even after the browser window is closed, whereas `sessionStorage` is cleared when the tab or window is closed."
+      - id: 1
+        text: "`localStorage` data persists even after the browser window is closed, whereas `sessionStorage` is cleared when the tab or window is closed."
+      - id: 2
+        text: "`localStorage` expires automatically after 24 hours, while `sessionStorage` lasts forever."
+      - id: 3
+        text: "`sessionStorage` can be shared across different browser domains, while `localStorage` is restricted to one tab."
+      - id: 4
+        text: "There is no difference; both persist indefinitely until explicitly cleared."
+    correctOptionId: 1
     explanation: "`localStorage` persists data with no expiration time across browser sessions, whereas `sessionStorage` is scoped strictly to the lifetime of the page session (tab)."
     type: "DIAGNOSTIC"
 
   - questionText: "What security restriction does the Same-Origin Policy enforce in web browsers?"
     options:
-      - "It blocks all network requests made using HTTPS."
-      - "It prevents a script from one origin from reading resources loaded from a different origin unless explicitly permitted."
-      - "It stops users from entering passwords in input fields without encryption."
-      - "It restricts cookie storage to a maximum size of 4KB."
-    correctAnswer: "It prevents a script from one origin from reading resources loaded from a different origin unless explicitly permitted."
+      - id: 1
+        text: "It blocks all network requests made using HTTPS."
+      - id: 2
+        text: "It prevents a script from one origin from reading resources loaded from a different origin unless explicitly permitted."
+      - id: 3
+        text: "It stops users from entering passwords in input fields without encryption."
+      - id: 4
+        text: "It restricts cookie storage to a maximum size of 4KB."
+    correctOptionId: 2
     explanation: "The Same-Origin Policy is a critical security mechanism that restricts how documents or scripts loaded from one origin can interact with resources from another origin."
     type: "DIAGNOSTIC"
 
   # --- QUIZ QUESTIONS (5 Total) ---
   - questionText: "Which HTTP status code category indicates that a client request was successfully received, understood, and accepted?"
     options:
-      - "1xx (Informational)"
-      - "2xx (Successful)"
-      - "4xx (Client Error)"
-      - "5xx (Server Error)"
-    correctAnswer: "2xx (Successful)"
+      - id: 1
+        text: "1xx (Informational)"
+      - id: 2
+        text: "2xx (Successful)"
+      - id: 3
+        text: "4xx (Client Error)"
+      - id: 4
+        text: "5xx (Server Error)"
+    correctOptionId: 2
     explanation: "2xx status codes (such as `200 OK` or `201 Created`) signify that the request succeeded."
     type: "QUIZ"
 
   - questionText: "How do cookies differ from `localStorage` regarding HTTP requests?"
     options:
-      - "Cookies are automatically sent by the browser with every HTTP request to the same domain, whereas `localStorage` is never sent automatically."
-      - "`localStorage` is sent in HTTP headers automatically, while cookies require manual fetching."
-      - "Cookies can only be accessed by server-side code and are invisible to JavaScript."
-      - "Cookies have no size limits, whereas `localStorage` is limited to 5 bytes."
-    correctAnswer: "Cookies are automatically sent by the browser with every HTTP request to the same domain, whereas `localStorage` is never sent automatically."
+      - id: 1
+        text: "Cookies are automatically sent by the browser with every HTTP request to the same domain, whereas `localStorage` is never sent automatically."
+      - id: 2
+        text: "`localStorage` is sent in HTTP headers automatically, while cookies require manual fetching."
+      - id: 3
+        text: "Cookies can only be accessed by server-side code and are invisible to JavaScript."
+      - id: 4
+        text: "Cookies have no size limits, whereas `localStorage` is limited to 5 bytes."
+    correctOptionId: 1
     explanation: "Cookies are attached to outgoing HTTP request headers automatically, making them useful for session management, whereas `localStorage` must be manually attached by client scripts."
     type: "QUIZ"
 
   - questionText: "What does a CORS (Cross-Origin Resource Sharing) error occur?"
     options:
-      - "When the client-side JavaScript tries to fetch from a different origin and the server's response lacks the required CORS header (like `Access-Control-Allow-Origin`)."
-      - "When the backend database runs out of connection pools."
-      - "When a React component fails to render due to syntax errors."
-      - "When a token expires in `localStorage`."
-    correctAnswer: "When the client-side JavaScript tries to fetch from a different origin and the server's response lacks the required CORS header (like `Access-Control-Allow-Origin`)."
+      - id: 1
+        text: "When the client-side JavaScript tries to fetch from a different origin and the server's response lacks the required CORS header (like `Access-Control-Allow-Origin`)."
+      - id: 2
+        text: "When the backend database runs out of connection pools."
+      - id: 3
+        text: "When a React component fails to render due to syntax errors."
+      - id: 4
+        text: "When a token expires in `localStorage`."
+    correctOptionId: 1
     explanation: "CORS is an HTTP-header based mechanism that allows servers to indicate any origins other than its own from which a browser should permit loading resources."
     type: "QUIZ"
 
   - questionText: "Which HTTP method is conventionally used to update an existing resource partially?"
     options:
-      - "GET"
-      - "POST"
-      - "PUT"
-      - "PATCH"
-    correctAnswer: "PATCH"
+      - id: 1
+        text: "GET"
+      - id: 2
+        text: "POST"
+      - id: 3
+        text: "PUT"
+      - id: 4
+        text: "PATCH"
+    correctOptionId: 4
     explanation: "`PATCH` applies partial modifications to a resource, whereas `PUT` typically replaces the entire resource."
     type: "QUIZ"
 
@@ -99,10 +123,14 @@ questions:
       // Set-Cookie: token=xyz; Secure; HttpOnly; SameSite=Strict
       ```
     options:
-      - "It ensures the cookie is only sent over HTTPS connections."
-      - "It prevents client-side JavaScript (via `document.cookie`) from accessing the cookie, protecting against XSS attacks."
-      - "It makes the cookie persist across different subdomains."
-      - "It automatically deletes the cookie when the browser closes."
-    correctAnswer: "It prevents client-side JavaScript (via `document.cookie`) from accessing the cookie, protecting against XSS attacks."
+      - id: 1
+        text: "It ensures the cookie is only sent over HTTPS connections."
+      - id: 2
+        text: "It prevents client-side JavaScript (via `document.cookie`) from accessing the cookie, protecting against XSS attacks."
+      - id: 3
+        text: "It makes the cookie persist across different subdomains."
+      - id: 4
+        text: "It automatically deletes the cookie when the browser closes."
+    correctOptionId: 2
     explanation: "`HttpOnly` cookies cannot be accessed through client-side scripts, mitigating the risk of session hijacking via Cross-Site Scripting (XSS)."
     type: "QUIZ"

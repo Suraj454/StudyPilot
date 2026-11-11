@@ -24,21 +24,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "Which mechanism describes JavaScript moving variable and function declarations to the top of their scope before code execution?"
     options:
-      - "Cloning"
-      - "Hoisting"
-      - "Bundling"
-      - "Minification"
-    correctAnswer: "Hoisting"
+      - id: 1
+        text: "Cloning"
+      - id: 2
+        text: "Hoisting"
+      - id: 3
+        text: "Bundling"
+      - id: 4
+        text: "Minification"
+    correctOptionId: 2
     explanation: "Hoisting is JavaScript's default behavior of moving declarations to the top of their compilation scope."
     type: "DIAGNOSTIC"
 
   - questionText: "What is lexical scope in JavaScript?"
     options:
-      - "Scope determined by where a function is called at runtime"
-      - "Scope determined by where variables are defined lexically in the source code structure"
-      - "Global scope shared across all imported modules automatically"
-      - "Scope that only applies to asynchronous promises"
-    correctAnswer: "Scope determined by where variables are defined lexically in the source code structure"
+      - id: 1
+        text: "Scope determined by where a function is called at runtime"
+      - id: 2
+        text: "Scope determined by where variables are defined lexically in the source code structure"
+      - id: 3
+        text: "Global scope shared across all imported modules automatically"
+      - id: 4
+        text: "Scope that only applies to asynchronous promises"
+    correctOptionId: 2
     explanation: "Lexical scope means that a function's scope is determined by its physical placement in the source code."
     type: "DIAGNOSTIC"
 
@@ -51,21 +59,29 @@ questions:
       }
       ```
     options:
-      - "1, 2, 3"
-      - "3, 3, 3"
-      - "ReferenceError"
-      - "undefined"
-    correctAnswer: "3, 3, 3"
+      - id: 1
+        text: "1, 2, 3"
+      - id: 2
+        text: "3, 3, 3"
+      - id: 3
+        text: "ReferenceError"
+      - id: 4
+        text: "undefined"
+    correctOptionId: 2
     explanation: "Because `var` is function-scoped rather than block-scoped, a single variable `i` is shared across iterations, resulting in 3 being logged three times."
     type: "QUIZ"
 
   - questionText: "What happens when you try to access a `let` or `const` variable before its declaration in code?"
     options:
-      - "It returns undefined"
-      - "It returns null"
-      - "It throws a ReferenceError due to the Temporal Dead Zone (TDZ)"
-      - "It silently skips the statement"
-    correctAnswer: "It throws a ReferenceError due to the Temporal Dead Zone (TDZ)"
+      - id: 1
+        text: "It returns undefined"
+      - id: 2
+        text: "It returns null"
+      - id: 3
+        text: "It throws a ReferenceError due to the Temporal Dead Zone (TDZ)"
+      - id: 4
+        text: "It silently skips the statement"
+    correctOptionId: 3
     explanation: "Variables declared with `let` and `const` are hoisted but remain uninitialized in the Temporal Dead Zone until their line of definition is reached."
     type: "QUIZ"
 
@@ -84,30 +100,42 @@ questions:
       console.log(counter());
       ```
     options:
-      - "1, 1"
-      - "1, 2"
-      - "0, 1"
-      - "ReferenceError"
-    correctAnswer: "1, 2"
+      - id: 1
+        text: "1, 1"
+      - id: 2
+        text: "1, 2"
+      - id: 3
+        text: "0, 1"
+      - id: 4
+        text: "ReferenceError"
+    correctOptionId: 2
     explanation: "The inner function retains a closure over the outer `count` variable, preserving and mutating its state across multiple invocations."
     type: "QUIZ"
 
   - questionText: "Which variable declaration keyword introduces block-scoping instead of function-scoping?"
     options:
-      - "var"
-      - "let"
-      - "function"
-      - "global"
-    correctAnswer: "let"
+      - id: 1
+        text: "var"
+      - id: 2
+        text: "let"
+      - id: 3
+        text: "function"
+      - id: 4
+        text: "global"
+    correctOptionId: 2
     explanation: "`let` and `const` are block-scoped, meaning they are confined to the nearest enclosing curly braces (`{}`)."
     type: "QUIZ"
 
   - questionText: "What is a primary practical use case for closures in software development?"
     options:
-      - "Creating private state or data encapsulation"
-      - "Speeding up array iteration performance"
-      - "Automatically handling CSS layout reflows"
-      - "Preventing all runtime syntax errors"
-    correctAnswer: "Creating private state or data encapsulation"
+      - id: 1
+        text: "Creating private state or data encapsulation"
+      - id: 2
+        text: "Speeding up array iteration performance"
+      - id: 3
+        text: "Automatically handling CSS layout reflows"
+      - id: 4
+        text: "Preventing all runtime syntax errors"
+    correctOptionId: 1
     explanation: "Closures allow developers to emulate private variables and methods, exposing only privileged accessors."
     type: "QUIZ"

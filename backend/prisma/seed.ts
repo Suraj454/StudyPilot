@@ -94,7 +94,7 @@ async function main() {
             topicId: topic.id,
             questionText: q.questionText,
             options: q.options,
-            correctAnswer: q.correctAnswer,
+            correctOptionId: q.correctOptionId,
             explanation: q.explanation || 'No explanation provided.',
             purpose: (q.type as AssessmentType) || AssessmentType.QUIZ, // Cast to AssessmentType enum
           },

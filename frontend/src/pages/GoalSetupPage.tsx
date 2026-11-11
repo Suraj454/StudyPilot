@@ -25,7 +25,7 @@ export default function GoalSetupPage() {
       return data;
     },
     onSuccess: () => {
-      navigate('/');
+      navigate('/diagnostic');
     },
   });
 

@@ -31,21 +31,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What is the primary difference between `props` and `state` in React components?"
     options:
-      - "`props` are mutable and managed internally by the component, whereas `state` is read-only and passed from parents."
-      - "`props` are passed from parent components and are read-only to the child, whereas `state` is managed internally and can be updated over time."
-      - "`props` can only be used in class components, while `state` is exclusively for function components."
-      - "There is no functional difference; both terms describe identical data structures."
-    correctAnswer: "`props` are passed from parent components and are read-only to the child, whereas `state` is managed internally and can be updated over time."
+      - id: 1
+        text: "`props` are mutable and managed internally by the component, whereas `state` is read-only and passed from parents."
+      - id: 2
+        text: "`props` are passed from parent components and are read-only to the child, whereas `state` is managed internally and can be updated over time."
+      - id: 3
+        text: "`props` can only be used in class components, while `state` is exclusively for function components."
+      - id: 4
+        text: "There is no functional difference; both terms describe identical data structures."
+    correctOptionId: 2
     explanation: "Props are external configuration parameters received from a parent, while state is private memory managed locally within the component."
     type: "DIAGNOSTIC"
 
   - questionText: "Why does React batch multiple `setState` calls together into a single re-render?"
     options:
-      - "To optimize rendering performance and prevent unnecessary DOM reflows"
-      - "To enforce strict asynchronous timing on database queries"
-      - "To automatically synchronize local storage with browser cookies"
-      - "To prevent developers from mutating arrays directly"
-    correctAnswer: "To optimize rendering performance and prevent unnecessary DOM reflows"
+      - id: 1
+        text: "To optimize rendering performance and prevent unnecessary DOM reflows"
+      - id: 2
+        text: "To enforce strict asynchronous timing on database queries"
+      - id: 3
+        text: "To automatically synchronize local storage with browser cookies"
+      - id: 4
+        text: "To prevent developers from mutating arrays directly"
+    correctOptionId: 1
     explanation: "Batching allows React to wait until all event handlers have finished running before triggering a single re-render, greatly boosting performance."
     type: "DIAGNOSTIC"
 
@@ -66,11 +74,15 @@ questions:
       }
       ```
     options:
-      - "3"
-      - "1"
-      - "0"
-      - "TypeError"
-    correctAnswer: "1"
+      - id: 1
+        text: "3"
+      - id: 2
+        text: "1"
+      - id: 3
+        text: "0"
+      - id: 4
+        text: "TypeError"
+    correctOptionId: 2
     explanation: "Because `count` is a snapshot constant during the current render, calling `setCount(count + 1)` three times uses the same stale `count` value (`0 + 1`), resulting in `1`. (To increment by 3, functional updates `setCount(prev => prev + 1)` must be used)."
     type: "QUIZ"
 
@@ -80,21 +92,29 @@ questions:
       const [user, setUser] = useState({ name: 'Alice', settings: { theme: 'dark' } });
       ```
     options:
-      - "user.settings.theme = 'light'; setUser(user);"
-      - "setUser({ ...user, settings: { ...user.settings, theme: 'light' } });"
-      - "setUser({ settings: { theme: 'light' } });"
-      - "setUser(prev => ({ ...prev, settings.theme: 'light' }));"
-    correctAnswer: "setUser({ ...user, settings: { ...user.settings, theme: 'light' } });"
+      - id: 1
+        text: "user.settings.theme = 'light'; setUser(user);"
+      - id: 2
+        text: "setUser({ ...user, settings: { ...user.settings, theme: 'light' } });"
+      - id: 3
+        text: "setUser({ settings: { theme: 'light' } });"
+      - id: 4
+        text: "setUser(prev => ({ ...prev, settings.theme: 'light' }));"
+    correctOptionId: 2
     explanation: "State updates in React must be immutable. You must copy all levels of nested objects/arrays using spread operators (`...`) rather than mutating properties directly."
     type: "QUIZ"
 
   - questionText: "When should you use a functional state update (passing a updater function to `setCount(prev => prev + 1)`)?"
     options:
-      - "Whenever state updates depend on the previous state value (such as counters or queues)."
-      - "Only when making asynchronous API requests."
-      - "Whenever you are working with string variables instead of numbers."
-      - "Whenever you want to bypass React's batching mechanism."
-    correctAnswer: "Whenever state updates depend on the previous state value (such as counters or queues)."
+      - id: 1
+        text: "Whenever state updates depend on the previous state value (such as counters or queues)."
+      - id: 2
+        text: "Only when making asynchronous API requests."
+      - id: 3
+        text: "Whenever you are working with string variables instead of numbers."
+      - id: 4
+        text: "Whenever you want to bypass React's batching mechanism."
+    correctOptionId: 1
     explanation: "Functional updates guarantee that you are working with the most up-to-date state snapshot, avoiding stale closure bugs."
     type: "QUIZ"
 
@@ -108,20 +128,28 @@ questions:
       };
       ```
     options:
-      - "The component will re-render with `[1, 2, 3, 4]`."
-      - "React will not trigger a re-render because the array reference (`items`) hasn't changed, even though its contents were mutated."
-      - "It throws a TypeScript compilation error."
-      - "It deletes all items from state."
-    correctAnswer: "React will not trigger a re-render because the array reference (`items`) hasn't changed, even though its contents were mutated."
+      - id: 1
+        text: "The component will re-render with `[1, 2, 3, 4]`."
+      - id: 2
+        text: "React will not trigger a re-render because the array reference (`items`) hasn't changed, even though its contents were mutated."
+      - id: 3
+        text: "It throws a TypeScript compilation error."
+      - id: 4
+        text: "It deletes all items from state."
+    correctOptionId: 2
     explanation: "React relies on referential equality (`oldState === newState`) to detect changes. Mutating an array with `.push()` keeps the reference identical, so React skips the re-render."
     type: "QUIZ"
 
   - questionText: "What happens to a component's local `useState` variables when the component is unmounted and later re-mounted?"
     options:
-      - "The state values are preserved in localStorage automatically."
-      - "The state is reset to its initial default value."
-      - "The application throws a memory leak error."
-      - "The previous state is restored from global Redux stores."
-    correctAnswer: "The state is reset to its initial default value."
+      - id: 1
+        text: "The state values are preserved in localStorage automatically."
+      - id: 2
+        text: "The state is reset to its initial default value."
+      - id: 3
+        text: "The application throws a memory leak error."
+      - id: 4
+        text: "The previous state is restored from global Redux stores."
+    correctOptionId: 2
     explanation: "Component state is tied to its placement and identity in the UI tree. When a component unmounts, its state is destroyed and reset upon re-mounting."
     type: "QUIZ"

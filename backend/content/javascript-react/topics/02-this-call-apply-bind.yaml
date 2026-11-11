@@ -27,21 +27,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "What does the `this` keyword typically refer to inside a standard object method in JavaScript?"
     options:
-      - "The global window object"
-      - "The object that is calling the method"
-      - "The function's prototype chain parent"
-      - "The DOM document root"
-    correctAnswer: "The object that is calling the method"
+      - id: 1
+        text: "The global window object"
+      - id: 2
+        text: "The object that is calling the method"
+      - id: 3
+        text: "The function's prototype chain parent"
+      - id: 4
+        text: "The DOM document root"
+    correctOptionId: 2
     explanation: "In a standard function invoked as a method of an object, `this` points to the object owner of the method."
     type: "DIAGNOSTIC"
 
   - questionText: "How do arrow functions handle the `this` keyword compared to regular functions?"
     options:
-      - "Arrow functions have their own dynamically bound `this`."
-      - "Arrow functions inherit `this` lexically from their enclosing execution scope."
-      - "Arrow functions always set `this` to undefined strictly."
-      - "Arrow functions allow `this` to be reassigned manually."
-    correctAnswer: "Arrow functions inherit `this` lexically from their enclosing execution scope."
+      - id: 1
+        text: "Arrow functions have their own dynamically bound `this`."
+      - id: 2
+        text: "Arrow functions inherit `this` lexically from their enclosing execution scope."
+      - id: 3
+        text: "Arrow functions always set `this` to undefined strictly."
+      - id: 4
+        text: "Arrow functions allow `this` to be reassigned manually."
+    correctOptionId: 2
     explanation: "Arrow functions do not create their own execution context; instead, they capture the `this` value of the enclosing lexical scope."
     type: "DIAGNOSTIC"
 
@@ -62,21 +70,29 @@ questions:
       obj.arrowFunc();
       ```
     options:
-      - "StudyPilot, StudyPilot"
-      - "StudyPilot, undefined (or global name)"
-      - "undefined, StudyPilot"
-      - "TypeError"
-    correctAnswer: "StudyPilot, undefined (or global name)"
+      - id: 1
+        text: "StudyPilot, StudyPilot"
+      - id: 2
+        text: "StudyPilot, undefined (or global name)"
+      - id: 3
+        text: "undefined, StudyPilot"
+      - id: 4
+        text: "TypeError"
+    correctOptionId: 2
     explanation: "Regular functions bind `this` to the calling object (`obj`), while arrow functions resolve `this` lexically from the outer scope where `obj` is defined."
     type: "QUIZ"
 
   - questionText: "What is the primary difference between the `call()` and `apply()` methods when invoking a function?"
     options:
-      - "`call()` passes arguments individually separated by commas, while `apply()` takes arguments as an array."
-      - "`apply()` returns a bound function copy, while `call()` executes immediately."
-      - "`call()` can only be used with arrow functions."
-      - "There is no difference between them."
-    correctAnswer: "`call()` passes arguments individually separated by commas, while `apply()` takes arguments as an array."
+      - id: 1
+        text: "`call()` passes arguments individually separated by commas, while `apply()` takes arguments as an array."
+      - id: 2
+        text: "`apply()` returns a bound function copy, while `call()` executes immediately."
+      - id: 3
+        text: "`call()` can only be used with arrow functions."
+      - id: 4
+        text: "There is no difference between them."
+    correctOptionId: 1
     explanation: "Both execute functions immediately with a specified `this` context, but `call` takes comma-separated arguments and `apply` takes an array of arguments."
     type: "QUIZ"
 
@@ -91,21 +107,29 @@ questions:
       boundGreet();
       ```
     options:
-      - "Hello, undefined"
-      - "Hello, Alice"
-      - "TypeError"
-      - "Hello, global"
-    correctAnswer: "Hello, Alice"
+      - id: 1
+        text: "Hello, undefined"
+      - id: 2
+        text: "Hello, Alice"
+      - id: 3
+        text: "TypeError"
+      - id: 4
+        text: "Hello, global"
+    correctOptionId: 2
     explanation: "The `.bind()` method creates a new permanent bound function whose `this` context is permanently set to the provided `user` object."
     type: "QUIZ"
 
   - questionText: "Can the `this` value of an arrow function be modified using `.call()`, `.apply()`, or `.bind()`?"
     options:
-      - "Yes, always."
-      - "No, arrow function `this` binding is lexical and immutable via explicit binding methods."
-      - "Only if strict mode is enabled."
-      - "Only using the `apply` method."
-    correctAnswer: "No, arrow function `this` binding is lexical and immutable via explicit binding methods."
+      - id: 1
+        text: "Yes, always."
+      - id: 2
+        text: "No, arrow function `this` binding is lexical and immutable via explicit binding methods."
+      - id: 3
+        text: "Only if strict mode is enabled."
+      - id: 4
+        text: "Only using the `apply` method."
+    correctOptionId: 2
     explanation: "Explicit binding methods like `call`, `apply`, and `bind` have no effect on arrow functions because their `this` is lexically bound."
     type: "QUIZ"
 
@@ -122,10 +146,14 @@ questions:
       console.log(borrowDouble());
       ```
     options:
-      - "20"
-      - "NaN or TypeError (depending on strict mode)"
-      - "0"
-      - "10"
-    correctAnswer: "NaN or TypeError (depending on strict mode)"
+      - id: 1
+        text: "20"
+      - id: 2
+        text: "NaN or TypeError (depending on strict mode)"
+      - id: 3
+        text: "0"
+      - id: 4
+        text: "10"
+    correctOptionId: 2
     explanation: "When `borrowDouble` is detached from the `calculator` object and invoked standalone, `this` defaults to `undefined` (in strict mode) or the global object, losing the reference to `calculator.num`."
     type: "QUIZ"

@@ -31,21 +31,29 @@ questions:
   # --- DIAGNOSTIC QUESTIONS (2 Total) ---
   - questionText: "Why does React require a unique `key` prop when rendering lists of elements?"
     options:
-      - "To optimize CSS stylesheet compilation speeds"
-      - "To help React identify which items have changed, been added, or been removed during reconciliation"
-      - "To encrypt user data stored in list components"
-      - "To automatically sort items alphabetically"
-    correctAnswer: "To help React identify which items have changed, been added, or been removed during reconciliation"
+      - id: 1
+        text: "To optimize CSS stylesheet compilation speeds"
+      - id: 2
+        text: "To help React identify which items have changed, been added, or been removed during reconciliation"
+      - id: 3
+        text: "To encrypt user data stored in list components"
+      - id: 4
+        text: "To automatically sort items alphabetically"
+    correctOptionId: 2
     explanation: "Keys give React a stable identity for list items, enabling efficient diffing and re-ordering without destroying unneeded DOM nodes."
     type: "DIAGNOSTIC"
 
   - questionText: "What is the Virtual DOM in React?"
     options:
-      - "A direct reference to the browser's native window document object"
-      - "A lightweight in-memory representation of the real DOM used for efficient diffing before updating the UI"
-      - "An external database backend for storing user sessions"
-      - "A compiled WebAssembly binary running on a background thread"
-    correctAnswer: "A lightweight in-memory representation of the real DOM used for efficient diffing before updating the UI"
+      - id: 1
+        text: "A direct reference to the browser's native window document object"
+      - id: 2
+        text: "A lightweight in-memory representation of the real DOM used for efficient diffing before updating the UI"
+      - id: 3
+        text: "An external database backend for storing user sessions"
+      - id: 4
+        text: "A compiled WebAssembly binary running on a background thread"
+    correctOptionId: 2
     explanation: "React computes changes on its lightweight Virtual DOM first, calculating the minimal set of real DOM mutations needed during reconciliation."
     type: "DIAGNOSTIC"
 
@@ -56,21 +64,29 @@ questions:
       {items.map((item, index) => <ListItem data="{item}" key="{index}"/>)}
       ```
     options:
-      - "It causes state corruption and incorrect UI updates because item identities get mismatched with re-ordered indices."
-      - "It throws an immediate compilation error."
-      - "It prevents the list from rendering altogether."
-      - "It doubles the memory consumption of the browser tab."
-    correctAnswer: "It causes state corruption and incorrect UI updates because item identities get mismatched with re-ordered indices."
+      - id: 1
+        text: "It causes state corruption and incorrect UI updates because item identities get mismatched with re-ordered indices."
+      - id: 2
+        text: "It throws an immediate compilation error."
+      - id: 3
+        text: "It prevents the list from rendering altogether."
+      - id: 4
+        text: "It doubles the memory consumption of the browser tab."
+    correctOptionId: 1
     explanation: "If indices are used as keys, deleting or re-ordering items causes React to mistake updated items for old ones based on position, leading to broken component states."
     type: "QUIZ"
 
   - questionText: "How does React's reconciliation diffing algorithm treat elements of different component types at the same position in the tree?"
     options:
-      - "It updates the existing DOM nodes in place."
-      - "It destroys the old tree entirely and builds a brand-new DOM subtree from scratch."
-      - "It merges their state properties together."
-      - "It throws a React hydration error."
-    correctAnswer: "It destroys the old tree entirely and builds a brand-new DOM subtree from scratch."
+      - id: 1
+        text: "It updates the existing DOM nodes in place."
+      - id: 2
+        text: "It destroys the old tree entirely and builds a brand-new DOM subtree from scratch."
+      - id: 3
+        text: "It merges their state properties together."
+      - id: 4
+        text: "It throws a React hydration error."
+    correctOptionId: 2
     explanation: "When component types change at a node position, React considers the old tree invalid, unmounts it completely, and constructs a fresh subtree."
     type: "QUIZ"
 
@@ -80,21 +96,29 @@ questions:
       <UserCard id="{userId}" key="{userId}"/>
       ```
     options:
-      - "The component state is preserved across the key change."
-      - "The old component instance is unmounted, its state is destroyed, and a new instance is mounted with fresh state."
-      - "It triggers an asynchronous error."
-      - "The key change is ignored by React."
-    correctAnswer: "The old component instance is unmounted, its state is destroyed, and a new instance is mounted with fresh state."
+      - id: 1
+        text: "The component state is preserved across the key change."
+      - id: 2
+        text: "The old component instance is unmounted, its state is destroyed, and a new instance is mounted with fresh state."
+      - id: 3
+        text: "It triggers an asynchronous error."
+      - id: 4
+        text: "The key change is ignored by React."
+    correctOptionId: 2
     explanation: "Keys act as an instruction for React's identity check. Changing a key forces React to treat it as an entirely different component instance, resetting its state."
     type: "QUIZ"
 
   - questionText: "What makes a good candidate for a list item `key`?"
     options:
-      - "Random numbers generated on every render (`Math.random()`)"
-      - "The sequential index of the array (`0, 1, 2...`)"
-      - "A unique, stable identifier from your data (such as a database `id` or UUID)"
-      - "The text content of the item string converted to uppercase"
-    correctAnswer: "A unique, stable identifier from your data (such as a database `id` or UUID)"
+      - id: 1
+        text: "Random numbers generated on every render (`Math.random()`)"
+      - id: 2
+        text: "The sequential index of the array (`0, 1, 2...`)"
+      - id: 3
+        text: "A unique, stable identifier from your data (such as a database `id` or UUID)"
+      - id: 4
+        text: "The text content of the item string converted to uppercase"
+    correctOptionId: 3
     explanation: "Keys must be unique among siblings and **stable** (should not change across renders or re-orderings), making unique database IDs ideal."
     type: "QUIZ"
 
@@ -104,10 +128,14 @@ questions:
       // Rendering items with duplicate keys ['a', 'a']
       ```
     options:
-      - "React will merge them into a single element."
-      - "React will log a warning in development, and rendering behavior or state preservation may become unpredictable."
-      - "The application will immediately crash with a fatal exception."
-      - "TypeScript will prevent code compilation."
-    correctAnswer: "React will log a warning in development, and rendering behavior or state preservation may become unpredictable."
+      - id: 1
+        text: "React will merge them into a single element."
+      - id: 2
+        text: "React will log a warning in development, and rendering behavior or state preservation may become unpredictable."
+      - id: 3
+        text: "The application will immediately crash with a fatal exception."
+      - id: 4
+        text: "TypeScript will prevent code compilation."
+    correctOptionId: 2
     explanation: "React relies on key uniqueness to map components correctly. Duplicate keys cause reconciliation confusion and console warnings."
     type: "QUIZ"
